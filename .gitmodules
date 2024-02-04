@@ -1,0 +1,3 @@
+[submodule "dynamixel_hardware"]
+	path = dynamixel_hardware
+	url = git@github.com:helix-robotics-ag/dynamixel_hardware.git
