@@ -1,0 +1,722 @@
+<?xml version="1.0" ?>
+<robot name="URDF_Hand" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find helix_description)/urdf/helix_description.materials.xacro" />
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.0005471831423920315 -0.0016798569855821554 0.04631267638063307" rpy="0 0 0"/>
+    <mass value="0.40903933360000916"/>
+    <inertia ixx="0.000261" iyy="0.00052" izz="0.000266" ixy="-0.0" iyz="-1.4e-05" ixz="-5e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="hand_base"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Pinky_Base_1">
+  <inertial>
+    <origin xyz="-0.008376635559625957 0.004041231012048677 0.0016787722912364467" rpy="0 0 0"/>
+    <mass value="0.01722650129403022"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="1e-06" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.04166 -0.008898 -0.0855" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Pinky_Base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="finger_base"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.04166 -0.008898 -0.0855" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Pinky_Base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Ring_Base_1">
+  <inertial>
+    <origin xyz="-0.007951198591705913 0.004825194698091718 0.00167877229123653" rpy="0 0 0"/>
+    <mass value="0.01722650129403022"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="1e-06" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.019342 -0.005171 -0.0915" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Ring_Base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="finger_base"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.019342 -0.005171 -0.0915" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Ring_Base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Middle_Base_1">
+  <inertial>
+    <origin xyz="-0.007500042848958245 0.00550000000000005 0.0016787722912365716" rpy="0 0 0"/>
+    <mass value="0.01722650129403022"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="1e-06" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.003522 -0.0035 -0.0965" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Middle_Base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="finger_base"/>
+  </visual>
+  <collision>
+    <origin xyz="0.003522 -0.0035 -0.0965" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Middle_Base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Index_Base_1">
+  <inertial>
+    <origin xyz="-0.007201714291713072 0.005885230272430774 0.0016787722912366132" rpy="0 0 0"/>
+    <mass value="0.01722650129403022"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="1e-06" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.027097 -0.003767 -0.0915" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Index_Base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="finger_base"/>
+  </visual>
+  <collision>
+    <origin xyz="0.027097 -0.003767 -0.0915" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Index_Base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Pinky_2dof_joint_1">
+  <inertial>
+    <origin xyz="-0.0006416335120010969 -0.0036788172469056583 0.0028828067230253634" rpy="0 0 0"/>
+    <mass value="0.0074922865960129585"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.032646 -0.016381 -0.0971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Pinky_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="2dof_joint"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.032646 -0.016381 -0.0971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Pinky_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Ring_2dof_joint_1">
+  <inertial>
+    <origin xyz="-0.000991028359982665 -0.00360017571648376 0.002882806723025405" rpy="0 0 0"/>
+    <mass value="0.0074922865960129585"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.011086 -0.013483 -0.1031" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Ring_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="2dof_joint"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.011086 -0.013483 -0.1031" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Ring_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Middle_2dof_joint_1">
+  <inertial>
+    <origin xyz="-0.0013008224764329435 -0.0034999999999918135 0.002882806723025322" rpy="0 0 0"/>
+    <mass value="0.0074922865960129585"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.011022 -0.0125 -0.1081" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Middle_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="2dof_joint"/>
+  </visual>
+  <collision>
+    <origin xyz="0.011022 -0.0125 -0.1081" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Middle_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Index_2dof_joint_1">
+  <inertial>
+    <origin xyz="-0.001481711245915833 -0.0034266921818958945 0.0028828067230253634" rpy="0 0 0"/>
+    <mass value="0.0074922865960129585"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.034116 -0.013147 -0.1031" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Index_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="2dof_joint"/>
+  </visual>
+  <collision>
+    <origin xyz="0.034116 -0.013147 -0.1031" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Index_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Pinky_Proximal_1">
+  <inertial>
+    <origin xyz="0.0004296237519091084 0.0013620375008921715 0.01924999999999988" rpy="0 0 0"/>
+    <mass value="0.03429785225598032"/>
+    <inertia ixx="4e-06" iyy="4e-06" izz="1e-06" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.033283 -0.012939 -0.1061" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Pinky_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="proximal"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.033283 -0.012939 -0.1061" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Pinky_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Ring_Proximal_1">
+  <inertial>
+    <origin xyz="0.00046048424839711943 0.0013514120835756566 0.02174999999999988" rpy="0 0 0"/>
+    <mass value="0.039861235764857395"/>
+    <inertia ixx="5e-06" iyy="6e-06" izz="1e-06" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.011391 -0.009996 -0.1121" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Ring_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="proximal"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.011391 -0.009996 -0.1121" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Ring_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Middle_Proximal_1">
+  <inertial>
+    <origin xyz="0.0005060224053605369 0.0013400132977013316 0.02424999999999984" rpy="0 0 0"/>
+    <mass value="0.045424619273734465"/>
+    <inertia ixx="8e-06" iyy="8e-06" izz="1e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.011022 -0.009 -0.1171" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Middle_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="proximal"/>
+  </visual>
+  <collision>
+    <origin xyz="0.011022 -0.009 -0.1171" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Middle_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Index_Proximal_1">
+  <inertial>
+    <origin xyz="0.0006445383282672051 0.001274183043787739 0.021749999999999825" rpy="0 0 0"/>
+    <mass value="0.039861235764857395"/>
+    <inertia ixx="5e-06" iyy="6e-06" izz="1e-06" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.034299 -0.009652 -0.1121" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Index_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="proximal"/>
+  </visual>
+  <collision>
+    <origin xyz="0.034299 -0.009652 -0.1121" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Index_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Thumb_Metacarpal_1">
+  <inertial>
+    <origin xyz="-0.01359625260089315 -0.0017692298236901428 0.024370489575467436" rpy="0 0 0"/>
+    <mass value="0.03702093284990669"/>
+    <inertia ixx="5e-06" iyy="6e-06" izz="2e-06" ixy="0.0" iyz="0.0" ixz="2e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.03087 -0.016337 -0.03092" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Thumb_Metacarpal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="proximal"/>
+  </visual>
+  <collision>
+    <origin xyz="0.03087 -0.016337 -0.03092" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Thumb_Metacarpal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Pinky_Middle_1">
+  <inertial>
+    <origin xyz="-0.0012455090682285813 0.0008557896737158826 0.013499999999999901" rpy="0 0 0"/>
+    <mass value="0.02150207018556307"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="0.0" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.033283 -0.012939 -0.1446" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Pinky_Middle_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="middle"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.033283 -0.012939 -0.1446" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Pinky_Middle_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Ring_Middle_1">
+  <inertial>
+    <origin xyz="-0.000948658567721217 0.0010960374234349358 0.015999999999999903" rpy="0 0 0"/>
+    <mass value="0.02706545369444013"/>
+    <inertia ixx="2e-06" iyy="2e-06" izz="1e-06" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.011391 -0.009996 -0.1556" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Ring_Middle_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="middle"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.011391 -0.009996 -0.1556" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Ring_Middle_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Middle_Middle_1">
+  <inertial>
+    <origin xyz="-0.000756134540831243 0.001219342101717296 0.017499999999999877" rpy="0 0 0"/>
+    <mass value="0.030403483799766377"/>
+    <inertia ixx="3e-06" iyy="3e-06" izz="1e-06" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.011022 -0.009 -0.1656" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Middle_Middle_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="middle"/>
+  </visual>
+  <collision>
+    <origin xyz="0.011022 -0.009 -0.1656" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Middle_Middle_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Index_Middle_1">
+  <inertial>
+    <origin xyz="-0.000786432090189769 0.0012174084476994501 0.015999999999999903" rpy="0 0 0"/>
+    <mass value="0.02706545369444013"/>
+    <inertia ixx="2e-06" iyy="2e-06" izz="1e-06" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.034299 -0.009652 -0.1556" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Index_Middle_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="middle"/>
+  </visual>
+  <collision>
+    <origin xyz="0.034299 -0.009652 -0.1556" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Index_Middle_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Thumb_Proximal_1">
+  <inertial>
+    <origin xyz="-0.008305221388103537 0.0008328830917124254 0.015409951066476982" rpy="0 0 0"/>
+    <mass value="0.028913628168106074"/>
+    <inertia ixx="2e-06" iyy="3e-06" izz="1e-06" ixy="0.0" iyz="0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.055962 -0.013817 -0.074167" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Thumb_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="middle"/>
+  </visual>
+  <collision>
+    <origin xyz="0.055962 -0.013817 -0.074167" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Thumb_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Pinky_Distal_1">
+  <inertial>
+    <origin xyz="0.0003897921226335907 0.001086136642043451 0.012319161138346219" rpy="0 0 0"/>
+    <mass value="0.019789884505209417"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="0.0" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.033283 -0.012939 -0.1716" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Pinky_Distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="distal"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.033283 -0.012939 -0.1716" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Pinky_Distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Ring_Distal_1">
+  <inertial>
+    <origin xyz="0.0004915156850270122 0.0010437760447156372 0.012319161138346219" rpy="0 0 0"/>
+    <mass value="0.019789884505209417"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="0.0" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.011391 -0.009996 -0.1876" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Ring_Distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="distal"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.011391 -0.009996 -0.1876" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Ring_Distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Middle_Distal_1">
+  <inertial>
+    <origin xyz="0.000580754413881706 0.0009967544815259813 0.012319161138346302" rpy="0 0 0"/>
+    <mass value="0.019789884505209417"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.011022 -0.009 -0.2006" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Middle_Distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="distal"/>
+  </visual>
+  <collision>
+    <origin xyz="0.011022 -0.009 -0.2006" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Middle_Distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Index_Distal_1">
+  <inertial>
+    <origin xyz="0.0006324531075937584 0.0009652221564475042 0.012319161138346219" rpy="0 0 0"/>
+    <mass value="0.019789884505209417"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.034299 -0.009652 -0.1876" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Index_Distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="distal"/>
+  </visual>
+  <collision>
+    <origin xyz="0.034299 -0.009652 -0.1876" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Index_Distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Thumb_Distal_1">
+  <inertial>
+    <origin xyz="-0.0067021018917190756 0.001123981716502775 0.011705331650145576" rpy="0 0 0"/>
+    <mass value="0.02143536945168767"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="1e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.073263 -0.013776 -0.104592" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Thumb_Distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="distal"/>
+  </visual>
+  <collision>
+    <origin xyz="0.073263 -0.013776 -0.104592" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Thumb_Distal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Thumb_Base_1">
+  <inertial>
+    <origin xyz="-0.0022150122695184654 0.0071797206014117656 -0.00778895619931743" rpy="0 0 0"/>
+    <mass value="0.019631240630742206"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="1e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.018032 -0.003966 -0.045336" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Thumb_Base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="finger_base"/>
+  </visual>
+  <collision>
+    <origin xyz="0.018032 -0.003966 -0.045336" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Thumb_Base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Thumb_2dof_joint_1">
+  <inertial>
+    <origin xyz="-0.0009098329677024661 0.001066944068375937 -0.010524206941038762" rpy="0 0 0"/>
+    <mass value="0.014036293256380273"/>
+    <inertia ixx="1e-06" iyy="2e-06" izz="1e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.026985 -0.012128 -0.043132" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Thumb_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="2dof_joint"/>
+  </visual>
+  <collision>
+    <origin xyz="0.026985 -0.012128 -0.043132" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find helix_description)/meshes/Thumb_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Pinky_Base" type="fixed">
+  <origin xyz="0.04166 0.008898 0.0855" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Pinky_Base_1"/>
+</joint>
+
+<joint name="Ring_Base" type="fixed">
+  <origin xyz="0.019342 0.005171 0.0915" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Ring_Base_1"/>
+</joint>
+
+<joint name="Middle_Base" type="fixed">
+  <origin xyz="-0.003522 0.0035 0.0965" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Middle_Base_1"/>
+</joint>
+
+<joint name="Index_Base" type="fixed">
+  <origin xyz="-0.027097 0.003767 0.0915" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Index_Base_1"/>
+</joint>
+
+<joint name="Pinky_MCP_Orth" type="continuous">
+  <origin xyz="-0.009014 0.007483 0.0116" rpy="0 0 0"/>
+  <parent link="Pinky_Base_1"/>
+  <child link="Pinky_2dof_joint_1"/>
+  <axis xyz="-0.182236 0.983255 0.0"/>
+</joint>
+
+<joint name="Ring_MCP_Orth" type="continuous">
+  <origin xyz="-0.008256 0.008312 0.0116" rpy="0 0 0"/>
+  <parent link="Ring_Base_1"/>
+  <child link="Ring_2dof_joint_1"/>
+  <axis xyz="-0.087156 0.996195 0.0"/>
+</joint>
+
+<joint name="Middle_MCP_Orth" type="continuous">
+  <origin xyz="-0.0075 0.009 0.0116" rpy="0 0 0"/>
+  <parent link="Middle_Base_1"/>
+  <child link="Middle_2dof_joint_1"/>
+  <axis xyz="-0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Index_MCP_Orth" type="continuous">
+  <origin xyz="-0.007019 0.00938 0.0116" rpy="0 0 0"/>
+  <parent link="Index_Base_1"/>
+  <child link="Index_2dof_joint_1"/>
+  <axis xyz="0.052336 0.99863 0.0"/>
+</joint>
+
+<joint name="Pinky_MCP" type="continuous">
+  <origin xyz="0.000637 -0.003442 0.009" rpy="0 0 0"/>
+  <parent link="Pinky_2dof_joint_1"/>
+  <child link="Pinky_Proximal_1"/>
+  <axis xyz="-0.983255 -0.182236 -0.0"/>
+</joint>
+
+<joint name="Ring_MCP" type="continuous">
+  <origin xyz="0.000305 -0.003487 0.009" rpy="0 0 0"/>
+  <parent link="Ring_2dof_joint_1"/>
+  <child link="Ring_Proximal_1"/>
+  <axis xyz="-0.996195 -0.087156 -0.0"/>
+</joint>
+
+<joint name="Middle_MCP" type="continuous">
+  <origin xyz="0.0 -0.0035 0.009" rpy="0 0 0"/>
+  <parent link="Middle_2dof_joint_1"/>
+  <child link="Middle_Proximal_1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+
+<joint name="Index_MCP" type="continuous">
+  <origin xyz="-0.000183 -0.003495 0.009" rpy="0 0 0"/>
+  <parent link="Index_2dof_joint_1"/>
+  <child link="Index_Proximal_1"/>
+  <axis xyz="-0.99863 0.052336 -0.0"/>
+</joint>
+
+<joint name="Thumb_CMC_Orth" type="continuous">
+  <origin xyz="-0.003885 0.004209 -0.012212" rpy="0 0 0"/>
+  <parent link="Thumb_2dof_joint_1"/>
+  <child link="Thumb_Metacarpal_1"/>
+  <axis xyz="-0.150384 -0.984808 -0.086824"/>
+</joint>
+
+<joint name="Pinky_PIP" type="continuous">
+  <origin xyz="0.0 0.0 0.0385" rpy="0 0 0"/>
+  <parent link="Pinky_Proximal_1"/>
+  <child link="Pinky_Middle_1"/>
+  <axis xyz="-0.983255 -0.182236 0.0"/>
+</joint>
+
+<joint name="Ring_PIP" type="continuous">
+  <origin xyz="0.0 0.0 0.0435" rpy="0 0 0"/>
+  <parent link="Ring_Proximal_1"/>
+  <child link="Ring_Middle_1"/>
+  <axis xyz="-0.996195 -0.087156 0.0"/>
+</joint>
+
+<joint name="Middle_PIP" type="continuous">
+  <origin xyz="0.0 0.0 0.0485" rpy="0 0 0"/>
+  <parent link="Middle_Proximal_1"/>
+  <child link="Middle_Middle_1"/>
+  <axis xyz="-1.0 -0.0 0.0"/>
+</joint>
+
+<joint name="Index_PIP" type="continuous">
+  <origin xyz="0.0 0.0 0.0435" rpy="0 0 0"/>
+  <parent link="Index_Proximal_1"/>
+  <child link="Index_Middle_1"/>
+  <axis xyz="-0.99863 0.052336 0.0"/>
+</joint>
+
+<joint name="Thumb_MCP" type="continuous">
+  <origin xyz="-0.025092 -0.00252 0.043247" rpy="0 0 0"/>
+  <parent link="Thumb_Metacarpal_1"/>
+  <child link="Thumb_Proximal_1"/>
+  <axis xyz="-0.788081 0.422615 -0.447577"/>
+</joint>
+
+<joint name="Pinky_DIP" type="continuous">
+  <origin xyz="0.0 0.0 0.027" rpy="0 0 0"/>
+  <parent link="Pinky_Middle_1"/>
+  <child link="Pinky_Distal_1"/>
+  <axis xyz="-0.983255 -0.182236 0.0"/>
+</joint>
+
+<joint name="Ring_DIP" type="continuous">
+  <origin xyz="0.0 0.0 0.032" rpy="0 0 0"/>
+  <parent link="Ring_Middle_1"/>
+  <child link="Ring_Distal_1"/>
+  <axis xyz="-0.996195 -0.087156 0.0"/>
+</joint>
+
+<joint name="Middle_DIP" type="continuous">
+  <origin xyz="0.0 0.0 0.035" rpy="0 0 0"/>
+  <parent link="Middle_Middle_1"/>
+  <child link="Middle_Distal_1"/>
+  <axis xyz="-1.0 -0.0 0.0"/>
+</joint>
+
+<joint name="Index_DIP" type="continuous">
+  <origin xyz="0.0 0.0 0.032" rpy="0 0 0"/>
+  <parent link="Index_Middle_1"/>
+  <child link="Index_Distal_1"/>
+  <axis xyz="-0.99863 0.052336 0.0"/>
+</joint>
+
+<joint name="Thumb_IP" type="continuous">
+  <origin xyz="-0.017301 -4.1e-05 0.030425" rpy="0 0 0"/>
+  <parent link="Thumb_Proximal_1"/>
+  <child link="Thumb_Distal_1"/>
+  <axis xyz="-0.788081 0.422615 -0.447577"/>
+</joint>
+
+<joint name="Thumb_Base" type="fixed">
+  <origin xyz="-0.018032 0.003966 0.045336" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Thumb_Base_1"/>
+</joint>
+
+<joint name="Thumb_CMC" type="continuous">
+  <origin xyz="-0.008953 0.008162 -0.002204" rpy="0 0 0"/>
+  <parent link="Thumb_Base_1"/>
+  <child link="Thumb_2dof_joint_1"/>
+  <axis xyz="0.494314 0.001155 -0.869283"/>
+</joint>
+
+</robot>
