@@ -11,17 +11,6 @@ def generate_launch_description():
     ld = LaunchDescription()
 
 
-    # Example nodes
-    talker_node = Node(
-        package="demo_nodes_cpp",
-        executable="talker",
-    )
-    
-    listener_node = Node(
-        package="demo_nodes_py",
-        executable="listener"
-    )
-
 
     robot_description = os.path.join(get_package_share_directory("helix_description"), "urdf", "helix.urdf.xacro")
     robot_description_config = xacro.process_file(robot_description)
@@ -76,10 +65,6 @@ def generate_launch_description():
         )
 
 
-
-
-    # ld.add_action(talker_node)
-    # ld.add_action(listener_node)
     ld.add_action(robot_state_publisher)
     ld.add_action(joint_state_publisher_node)
     ld.add_action(dynamixel_block_ros2_control_node)
