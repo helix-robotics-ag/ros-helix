@@ -1,3 +1,5 @@
+import os
+
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
@@ -43,7 +45,7 @@ def generate_launch_description():
             "dynamixel_block_description"), "controllers", "controllers.yaml"
     )
 
-    dynamixel_block_ros2_control_node_node = Node(
+    dynamixel_block_ros2_control_node = Node(
             package="controller_manager",
             executable="ros2_control_node",
             parameters=[
@@ -77,7 +79,7 @@ def generate_launch_description():
     ld.add_action(listener_node)
     ld.add_action(robot_state_publisher)
     ld.add_action(joint_state_publisher_node)
-    ld.add_action(dynamixel_block_ros2_control_node_node)
+    ld.add_action(dynamixel_block_ros2_control_node)
     ld.add_action(dynamixel_block_joint_state_broadcaster_node)
     ld.add_action(dynamixel_block_position_controller_node)
 
