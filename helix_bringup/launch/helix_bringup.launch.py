@@ -44,8 +44,10 @@ def generate_launch_description():
     dynamixel_block_ros2_control_node = Node(
             package="controller_manager",
             executable="ros2_control_node",
-            parameters=[
-                {"robot_description": robot_description_config.toxml()}, controller_config],
+            parameters=[controller_config],
+            remappings=[
+                ('/controller_manager/robot_description', '/robot_description'),
+            ],
             output="screen",
         )
 
