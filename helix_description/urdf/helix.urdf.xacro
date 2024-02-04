@@ -1,17 +1,14 @@
 <?xml version="1.0"?>
 <robot name="helix_description" xmlns:xacro="http://ros.org/wiki/xacro">
   
-  <!-- Uncomment this to show dynamixel!-->
   <xacro:include filename="$(find helix_description)/urdf/dynamixel_block.xacro" />
   <xacro:include filename="$(find helix_description)/urdf/dynamixel_block.ros2_control.xacro" />
 
-  <!-- Uncomment this to show hand!-->
-  <xacro:include filename="$(find helix_description)/urdf/helix.xacro" />
+  <xacro:include filename="$(find helix_description)/urdf/helix.xacro"  />
 
 
   <link name="world"/>
 
-  <!-- Uncomment this to show dynamixels!-->
   <xacro:dynamixel_block_ros2_control name="dynamixel_block_ros2_control" />
 
   <xacro:dynamixel_block parent="world">

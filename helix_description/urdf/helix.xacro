@@ -1,6 +1,8 @@
 <?xml version="1.0" ?>
 <robot name="URDF_Hand" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+<xacro:arg name="mesh_url" default="package://helix_description" />
+
 <xacro:include filename="$(find helix_description)/urdf/helix.materials.xacro" />
 
 <link name="base_link">
@@ -12,14 +14,14 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="hand_base"/>
   </visual>
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -33,14 +35,14 @@
   <visual>
     <origin xyz="-0.04166 -0.008898 -0.0855" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Pinky_Base_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Pinky_Base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="finger_base"/>
   </visual>
   <collision>
     <origin xyz="-0.04166 -0.008898 -0.0855" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Pinky_Base_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Pinky_Base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -54,14 +56,14 @@
   <visual>
     <origin xyz="-0.019342 -0.005171 -0.0915" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Ring_Base_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Ring_Base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="finger_base"/>
   </visual>
   <collision>
     <origin xyz="-0.019342 -0.005171 -0.0915" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Ring_Base_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Ring_Base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -75,14 +77,14 @@
   <visual>
     <origin xyz="0.003522 -0.0035 -0.0965" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Middle_Base_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Middle_Base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="finger_base"/>
   </visual>
   <collision>
     <origin xyz="0.003522 -0.0035 -0.0965" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Middle_Base_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Middle_Base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -96,14 +98,14 @@
   <visual>
     <origin xyz="0.027097 -0.003767 -0.0915" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Index_Base_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Index_Base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="finger_base"/>
   </visual>
   <collision>
     <origin xyz="0.027097 -0.003767 -0.0915" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Index_Base_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Index_Base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -117,14 +119,14 @@
   <visual>
     <origin xyz="-0.032646 -0.016381 -0.0971" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Pinky_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Pinky_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="2dof_joint"/>
   </visual>
   <collision>
     <origin xyz="-0.032646 -0.016381 -0.0971" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Pinky_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Pinky_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -138,14 +140,14 @@
   <visual>
     <origin xyz="-0.011086 -0.013483 -0.1031" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Ring_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Ring_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="2dof_joint"/>
   </visual>
   <collision>
     <origin xyz="-0.011086 -0.013483 -0.1031" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Ring_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Ring_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -159,14 +161,14 @@
   <visual>
     <origin xyz="0.011022 -0.0125 -0.1081" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Middle_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Middle_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="2dof_joint"/>
   </visual>
   <collision>
     <origin xyz="0.011022 -0.0125 -0.1081" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Middle_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Middle_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -180,14 +182,14 @@
   <visual>
     <origin xyz="0.034116 -0.013147 -0.1031" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Index_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Index_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="2dof_joint"/>
   </visual>
   <collision>
     <origin xyz="0.034116 -0.013147 -0.1031" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Index_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Index_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -201,14 +203,14 @@
   <visual>
     <origin xyz="-0.033283 -0.012939 -0.1061" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Pinky_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Pinky_Proximal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="proximal"/>
   </visual>
   <collision>
     <origin xyz="-0.033283 -0.012939 -0.1061" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Pinky_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Pinky_Proximal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -222,14 +224,14 @@
   <visual>
     <origin xyz="-0.011391 -0.009996 -0.1121" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Ring_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Ring_Proximal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="proximal"/>
   </visual>
   <collision>
     <origin xyz="-0.011391 -0.009996 -0.1121" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Ring_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Ring_Proximal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -243,14 +245,14 @@
   <visual>
     <origin xyz="0.011022 -0.009 -0.1171" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Middle_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Middle_Proximal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="proximal"/>
   </visual>
   <collision>
     <origin xyz="0.011022 -0.009 -0.1171" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Middle_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Middle_Proximal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -264,14 +266,14 @@
   <visual>
     <origin xyz="0.034299 -0.009652 -0.1121" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Index_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Index_Proximal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="proximal"/>
   </visual>
   <collision>
     <origin xyz="0.034299 -0.009652 -0.1121" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Index_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Index_Proximal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -285,14 +287,14 @@
   <visual>
     <origin xyz="0.03087 -0.016337 -0.03092" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Thumb_Metacarpal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_Metacarpal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="proximal"/>
   </visual>
   <collision>
     <origin xyz="0.03087 -0.016337 -0.03092" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Thumb_Metacarpal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_Metacarpal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -306,14 +308,14 @@
   <visual>
     <origin xyz="-0.033283 -0.012939 -0.1446" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Pinky_Middle_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Pinky_Middle_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="middle"/>
   </visual>
   <collision>
     <origin xyz="-0.033283 -0.012939 -0.1446" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Pinky_Middle_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Pinky_Middle_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -327,14 +329,14 @@
   <visual>
     <origin xyz="-0.011391 -0.009996 -0.1556" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Ring_Middle_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Ring_Middle_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="middle"/>
   </visual>
   <collision>
     <origin xyz="-0.011391 -0.009996 -0.1556" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Ring_Middle_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Ring_Middle_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -348,14 +350,14 @@
   <visual>
     <origin xyz="0.011022 -0.009 -0.1656" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Middle_Middle_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Middle_Middle_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="middle"/>
   </visual>
   <collision>
     <origin xyz="0.011022 -0.009 -0.1656" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Middle_Middle_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Middle_Middle_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -369,14 +371,14 @@
   <visual>
     <origin xyz="0.034299 -0.009652 -0.1556" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Index_Middle_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Index_Middle_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="middle"/>
   </visual>
   <collision>
     <origin xyz="0.034299 -0.009652 -0.1556" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Index_Middle_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Index_Middle_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -390,14 +392,14 @@
   <visual>
     <origin xyz="0.055962 -0.013817 -0.074167" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Thumb_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_Proximal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="middle"/>
   </visual>
   <collision>
     <origin xyz="0.055962 -0.013817 -0.074167" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Thumb_Proximal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_Proximal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -411,14 +413,14 @@
   <visual>
     <origin xyz="-0.033283 -0.012939 -0.1716" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Pinky_Distal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Pinky_Distal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="distal"/>
   </visual>
   <collision>
     <origin xyz="-0.033283 -0.012939 -0.1716" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Pinky_Distal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Pinky_Distal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -432,14 +434,14 @@
   <visual>
     <origin xyz="-0.011391 -0.009996 -0.1876" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Ring_Distal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Ring_Distal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="distal"/>
   </visual>
   <collision>
     <origin xyz="-0.011391 -0.009996 -0.1876" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Ring_Distal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Ring_Distal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -453,14 +455,14 @@
   <visual>
     <origin xyz="0.011022 -0.009 -0.2006" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Middle_Distal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Middle_Distal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="distal"/>
   </visual>
   <collision>
     <origin xyz="0.011022 -0.009 -0.2006" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Middle_Distal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Middle_Distal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -474,14 +476,14 @@
   <visual>
     <origin xyz="0.034299 -0.009652 -0.1876" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Index_Distal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Index_Distal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="distal"/>
   </visual>
   <collision>
     <origin xyz="0.034299 -0.009652 -0.1876" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Index_Distal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Index_Distal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -495,14 +497,14 @@
   <visual>
     <origin xyz="0.073263 -0.013776 -0.104592" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Thumb_Distal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_Distal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="distal"/>
   </visual>
   <collision>
     <origin xyz="0.073263 -0.013776 -0.104592" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Thumb_Distal_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_Distal_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -516,14 +518,14 @@
   <visual>
     <origin xyz="0.018032 -0.003966 -0.045336" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Thumb_Base_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_Base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="finger_base"/>
   </visual>
   <collision>
     <origin xyz="0.018032 -0.003966 -0.045336" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Thumb_Base_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_Base_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -537,14 +539,14 @@
   <visual>
     <origin xyz="0.026985 -0.012128 -0.043132" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Thumb_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="2dof_joint"/>
   </visual>
   <collision>
     <origin xyz="0.026985 -0.012128 -0.043132" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find helix_description)/meshes/Thumb_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
