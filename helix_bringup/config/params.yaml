@@ -1,3 +1,0 @@
-dynamixel_joint_state_publisher:
-  ros__parameters:
-    use_local_topics: True
