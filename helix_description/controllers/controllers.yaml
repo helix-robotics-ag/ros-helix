@@ -1,0 +1,25 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    dynamixel_position_controller:
+      type: position_controllers/JointGroupPositionController
+
+    dynamixel_joint_state_publisher:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+dynamixel_position_controller:
+  ros__parameters:
+    joints:
+      - dynamixel0
+      - dynamixel1
+      - dynamixel2
+      - dynamixel3
+      - dynamixel4
+      - dynamixel5
+      - dynamixel6
+      - dynamixel7
+      - dynamixel8
+      - dynamixel9
+      - dynamixel10
+      - dynamixel11
