@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
 <!-- Import Rviz colors -->
-<xacro:include filename="$(find dynamixel_block_description)/urdf/dynamixel_block.material.xacro" />
+<xacro:include filename="$(find helix_description)/urdf/dynamixel_block.material.xacro" />
 
 
 <xacro:macro name="dynamixel_block" params="parent *origin">
@@ -24,14 +24,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_body"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -46,14 +46,14 @@
     <visual>
       <origin xyz="-0.03 -0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="-0.03 -0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -69,14 +69,14 @@
     <visual>
       <origin xyz="-0.03 -0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="-0.03 -0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -90,14 +90,14 @@
     <visual>
       <origin xyz="-0.0 -0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_2_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_2_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="-0.0 -0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_2_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_2_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -111,14 +111,14 @@
     <visual>
       <origin xyz="-0.0 -0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_3_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_3_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="-0.0 -0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_3_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_3_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -132,14 +132,14 @@
     <visual>
       <origin xyz="0.03 -0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_4_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_4_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="0.03 -0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_4_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_4_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -153,14 +153,14 @@
     <visual>
       <origin xyz="0.03 -0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_5_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_5_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="0.03 -0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_5_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_5_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -174,14 +174,14 @@
     <visual>
       <origin xyz="0.03 0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_6_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_6_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="0.03 0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_6_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_6_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -195,14 +195,14 @@
     <visual>
       <origin xyz="0.03 0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_7_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_7_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="0.03 0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_7_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_7_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -216,14 +216,14 @@
     <visual>
       <origin xyz="-0.0 0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_8_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_8_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="-0.0 0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_8_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_8_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -237,14 +237,14 @@
     <visual>
       <origin xyz="-0.0 0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_9_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_9_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="-0.0 0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_9_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_9_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -258,14 +258,14 @@
     <visual>
       <origin xyz="-0.03 0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_10_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_10_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="-0.03 0.037 -0.08475" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_10_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_10_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -279,14 +279,14 @@
     <visual>
       <origin xyz="-0.03 0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_11_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_11_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dynamixel_horn"/>
     </visual>
     <collision>
       <origin xyz="-0.03 0.037 -0.01425" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find dynamixel_block_description)/meshes/horn_11_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find helix_description)/meshes/horn_11_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -395,7 +395,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://dynamixel_block_description/meshes/chain_link1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://helix_description/meshes/chain_link1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="grey"/>
     </visual>
@@ -403,7 +403,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://dynamixel_block_description/meshes/chain_link1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://helix_description/meshes/chain_link1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
 
@@ -423,7 +423,7 @@
     <visual>
       <origin xyz="0 0 0.019" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://dynamixel_block_description/meshes/chain_link2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://helix_description/meshes/chain_link2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="grey"/>
     </visual>
@@ -431,7 +431,7 @@
     <collision>
       <origin xyz="0 0 0.019" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://dynamixel_block_description/meshes/chain_link2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://helix_description/meshes/chain_link2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
 
@@ -458,7 +458,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://dynamixel_block_description/meshes/chain_link3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://helix_description/meshes/chain_link3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="grey"/>
     </visual>
@@ -466,7 +466,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://dynamixel_block_description/meshes/chain_link3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://helix_description/meshes/chain_link3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
 
