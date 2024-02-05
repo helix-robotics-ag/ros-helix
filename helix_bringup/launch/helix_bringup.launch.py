@@ -28,7 +28,7 @@ def generate_launch_description():
         executable='joint_state_publisher',
         name='joint_state_publisher',
         parameters=[{
-            'source_list': ['helix_description/joint_states','dynamixel_joint_state_publisher/joint_states'],
+            'source_list': ['helix_joint_state_publisher/joint_states','dynamixel_joint_state_publisher/joint_states'],
         }]
     )
 
