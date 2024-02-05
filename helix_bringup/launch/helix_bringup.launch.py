@@ -1,4 +1,5 @@
 import os
+import socket
 
 import xacro
 from ament_index_python.packages import get_package_share_directory
@@ -11,7 +12,8 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     robot_description = os.path.join(get_package_share_directory("helix_description"), "urdf", "helix.urdf.xacro")
-    robot_description_config = xacro.process_file(robot_description, mappings={'mesh_url' : 'http://127.0.0.1'})
+
+    robot_description_config = xacro.process_file(robot_description, mappings={'mesh_url' : f'http://{socket.gethostname()}.local'})
     # robot_description_config = xacro.process_file(robot_description, mappings={'mesh_url' : 'package://helix_description'})
 
     robot_state_publisher = Node(
