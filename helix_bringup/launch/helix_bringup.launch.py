@@ -30,7 +30,7 @@ def generate_launch_description():
     #     executable='joint_state_publisher',
     #     name='joint_state_publisher',
     #     parameters=[{
-    #         'source_list': ['helix_joint_state_publisher/joint_states','dynamixel_joint_state_publisher/joint_states'],
+    #         'source_list': ['helix_joint_state_publisher/joint_states','joint_state_broadcaster/joint_states'],
     #     }]
     # )
 
@@ -40,23 +40,23 @@ def generate_launch_description():
     )
 
     helix_ros2_control_node = Node(
-            package="controller_manager",
-            executable="ros2_control_node",
-            parameters=[controller_config],
-            remappings=[
-                ('/controller_manager/robot_description', '/robot_description'),
-            ],
-            output="screen",
-        )
+        package="controller_manager",
+        executable="ros2_control_node",
+        parameters=[controller_config],
+        remappings=[
+            ('/controller_manager/robot_description', '/robot_description'),
+        ],
+        output="screen",
+    )
 
-    helix_joint_position_controller_node =    Node(
-            package="controller_manager",
-            executable="spawner",
-            arguments=["joint_position_controller", "--inactive", "-c", "/controller_manager"],
-            output="screen",
-        )
+    helix_joint_position_controller_node = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_position_controller", "--inactive", "-c", "/controller_manager"],
+        output="screen",
+    )
     
-    helix_joint_effort_controller_node =    Node(
+    helix_joint_effort_controller_node = Node(
             package="controller_manager",
             executable="spawner",
             arguments=["joint_effort_controller", "--inactive", "-c", "/controller_manager"],
