@@ -3,7 +3,7 @@
 <package format="3">
   <name>helix_bringup</name>
   <version>0.0.1</version>
-  <description>The helix_brinup package</description>
+  <description>The helix_bringup package</description>
   <maintainer email="polzin.max@gmail.com">max</maintainer>
   <license>proprietary</license>
 

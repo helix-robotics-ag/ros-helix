@@ -25,24 +25,21 @@ def generate_launch_description():
             output="screen",
         )
 
-    joint_state_publisher_node = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        name='joint_state_publisher',
-        parameters=[{
-            'source_list': ['helix_joint_state_publisher/joint_states','dynamixel_joint_state_publisher/joint_states'],
-        }]
-    )
-
-
-
+    # joint_state_publisher_node = Node(
+    #     package='joint_state_publisher',
+    #     executable='joint_state_publisher',
+    #     name='joint_state_publisher',
+    #     parameters=[{
+    #         'source_list': ['helix_joint_state_publisher/joint_states','dynamixel_joint_state_publisher/joint_states'],
+    #     }]
+    # )
 
     controller_config = os.path.join(
         get_package_share_directory(
             "helix_description"), "config", "controllers.yaml"
     )
 
-    dynamixel_block_ros2_control_node = Node(
+    helix_ros2_control_node = Node(
             package="controller_manager",
             executable="ros2_control_node",
             parameters=[controller_config],
@@ -52,26 +49,34 @@ def generate_launch_description():
             output="screen",
         )
 
-    dynamixel_block_joint_state_broadcaster_node =   Node(
+    helix_joint_position_controller_node =    Node(
             package="controller_manager",
             executable="spawner",
-            arguments=["dynamixel_joint_state_publisher", "--controller-manager", "/controller_manager"],
-            parameters=[controller_config],
+            arguments=["joint_position_controller", "--inactive", "-c", "/controller_manager"],
             output="screen",
         )
+    
+    helix_joint_effort_controller_node =    Node(
+            package="controller_manager",
+            executable="spawner",
+            arguments=["joint_effort_controller", "--inactive", "-c", "/controller_manager"],
+            output="screen",
+    )
 
-    dynamixel_block_position_controller_node =    Node(
-            package="controller_manager",
-            executable="spawner",
-            arguments=["dynamixel_position_controller", "-c", "/controller_manager"],
-            output="screen",
-        )
+    helix_joint_state_broadcaster_node = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        parameters=[controller_config],
+        output="screen",
+    )
 
 
     ld.add_action(robot_state_publisher)
-    ld.add_action(joint_state_publisher_node)
-    ld.add_action(dynamixel_block_ros2_control_node)
-    ld.add_action(dynamixel_block_joint_state_broadcaster_node)
-    ld.add_action(dynamixel_block_position_controller_node)
+    # ld.add_action(joint_state_publisher_node)
+    ld.add_action(helix_ros2_control_node)
+    ld.add_action(helix_joint_position_controller_node)
+    ld.add_action(helix_joint_effort_controller_node)
+    ld.add_action(helix_joint_state_broadcaster_node)
 
     return ld

@@ -1,0 +1,222 @@
+<?xml version="1.0" ?>
+<robot name="urdf_helix" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- URDF Representing the Helix arm -->
+
+<xacro:arg name="mesh_url" default="package://helix_description" />
+
+<xacro:include filename="$(find helix_description)/urdf/helix.materials.xacro" />
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.0005471831423920315 -0.0016798569855821554 0.04631267638063307" rpy="0 0 0"/>
+    <mass value="0.40903933360000916"/>
+    <inertia ixx="0.000261" iyy="0.00052" izz="0.000266" ixy="-0.0" iyz="-1.4e-05" ixz="-5e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="$(arg mesh_url)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="hand_base"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="$(arg mesh_url)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Thumb_2dof_joint_1">
+  <inertial>
+    <origin xyz="-0.0009098329677024661 0.001066944068375937 -0.010524206941038762" rpy="0 0 0"/>
+    <mass value="0.014036293256380273"/>
+    <inertia ixx="1e-06" iyy="2e-06" izz="1e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.026985 -0.012128 -0.043132" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="2dof_joint"/>
+  </visual>
+  <collision>
+    <origin xyz="0.026985 -0.012128 -0.043132" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="$(arg mesh_url)/meshes/Thumb_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Pinky_Base" type="fixed">
+  <origin xyz="0.04166 0.008898 0.0855" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Pinky_Base_1"/>
+</joint>
+
+<joint name="Ring_Base" type="fixed">
+  <origin xyz="0.019342 0.005171 0.0915" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Ring_Base_1"/>
+</joint>
+
+<joint name="Middle_Base" type="fixed">
+  <origin xyz="-0.003522 0.0035 0.0965" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Middle_Base_1"/>
+</joint>
+
+<joint name="Index_Base" type="fixed">
+  <origin xyz="-0.027097 0.003767 0.0915" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Index_Base_1"/>
+</joint>
+
+<joint name="Pinky_MCP_Orth" type="continuous">
+  <origin xyz="-0.009014 0.007483 0.0116" rpy="0 0 0"/>
+  <parent link="Pinky_Base_1"/>
+  <child link="Pinky_2dof_joint_1"/>
+  <axis xyz="-0.182236 0.983255 0.0"/>
+</joint>
+
+<joint name="Ring_MCP_Orth" type="continuous">
+  <origin xyz="-0.008256 0.008312 0.0116" rpy="0 0 0"/>
+  <parent link="Ring_Base_1"/>
+  <child link="Ring_2dof_joint_1"/>
+  <axis xyz="-0.087156 0.996195 0.0"/>
+</joint>
+
+<joint name="Middle_MCP_Orth" type="continuous">
+  <origin xyz="-0.0075 0.009 0.0116" rpy="0 0 0"/>
+  <parent link="Middle_Base_1"/>
+  <child link="Middle_2dof_joint_1"/>
+  <axis xyz="-0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Index_MCP_Orth" type="continuous">
+  <origin xyz="-0.007019 0.00938 0.0116" rpy="0 0 0"/>
+  <parent link="Index_Base_1"/>
+  <child link="Index_2dof_joint_1"/>
+  <axis xyz="0.052336 0.99863 0.0"/>
+</joint>
+
+<joint name="Pinky_MCP" type="continuous">
+  <origin xyz="0.000637 -0.003442 0.009" rpy="0 0 0"/>
+  <parent link="Pinky_2dof_joint_1"/>
+  <child link="Pinky_Proximal_1"/>
+  <axis xyz="-0.983255 -0.182236 -0.0"/>
+</joint>
+
+<joint name="Ring_MCP" type="continuous">
+  <origin xyz="0.000305 -0.003487 0.009" rpy="0 0 0"/>
+  <parent link="Ring_2dof_joint_1"/>
+  <child link="Ring_Proximal_1"/>
+  <axis xyz="-0.996195 -0.087156 -0.0"/>
+</joint>
+
+<joint name="Middle_MCP" type="continuous">
+  <origin xyz="0.0 -0.0035 0.009" rpy="0 0 0"/>
+  <parent link="Middle_2dof_joint_1"/>
+  <child link="Middle_Proximal_1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+
+<joint name="Index_MCP" type="continuous">
+  <origin xyz="-0.000183 -0.003495 0.009" rpy="0 0 0"/>
+  <parent link="Index_2dof_joint_1"/>
+  <child link="Index_Proximal_1"/>
+  <axis xyz="-0.99863 0.052336 -0.0"/>
+</joint>
+
+<joint name="Thumb_CMC_Orth" type="continuous">
+  <origin xyz="-0.003885 0.004209 -0.012212" rpy="0 0 0"/>
+  <parent link="Thumb_2dof_joint_1"/>
+  <child link="Thumb_Metacarpal_1"/>
+  <axis xyz="-0.150384 -0.984808 -0.086824"/>
+</joint>
+
+<joint name="Pinky_PIP" type="continuous">
+  <origin xyz="0.0 0.0 0.0385" rpy="0 0 0"/>
+  <parent link="Pinky_Proximal_1"/>
+  <child link="Pinky_Middle_1"/>
+  <axis xyz="-0.983255 -0.182236 0.0"/>
+</joint>
+
+<joint name="Ring_PIP" type="continuous">
+  <origin xyz="0.0 0.0 0.0435" rpy="0 0 0"/>
+  <parent link="Ring_Proximal_1"/>
+  <child link="Ring_Middle_1"/>
+  <axis xyz="-0.996195 -0.087156 0.0"/>
+</joint>
+
+<joint name="Middle_PIP" type="continuous">
+  <origin xyz="0.0 0.0 0.0485" rpy="0 0 0"/>
+  <parent link="Middle_Proximal_1"/>
+  <child link="Middle_Middle_1"/>
+  <axis xyz="-1.0 -0.0 0.0"/>
+</joint>
+
+<joint name="Index_PIP" type="continuous">
+  <origin xyz="0.0 0.0 0.0435" rpy="0 0 0"/>
+  <parent link="Index_Proximal_1"/>
+  <child link="Index_Middle_1"/>
+  <axis xyz="-0.99863 0.052336 0.0"/>
+</joint>
+
+<joint name="Thumb_MCP" type="continuous">
+  <origin xyz="-0.025092 -0.00252 0.043247" rpy="0 0 0"/>
+  <parent link="Thumb_Metacarpal_1"/>
+  <child link="Thumb_Proximal_1"/>
+  <axis xyz="-0.788081 0.422615 -0.447577"/>
+</joint>
+
+<joint name="Pinky_DIP" type="continuous">
+  <origin xyz="0.0 0.0 0.027" rpy="0 0 0"/>
+  <parent link="Pinky_Middle_1"/>
+  <child link="Pinky_Distal_1"/>
+  <axis xyz="-0.983255 -0.182236 0.0"/>
+</joint>
+
+<joint name="Ring_DIP" type="continuous">
+  <origin xyz="0.0 0.0 0.032" rpy="0 0 0"/>
+  <parent link="Ring_Middle_1"/>
+  <child link="Ring_Distal_1"/>
+  <axis xyz="-0.996195 -0.087156 0.0"/>
+</joint>
+
+<joint name="Middle_DIP" type="continuous">
+  <origin xyz="0.0 0.0 0.035" rpy="0 0 0"/>
+  <parent link="Middle_Middle_1"/>
+  <child link="Middle_Distal_1"/>
+  <axis xyz="-1.0 -0.0 0.0"/>
+</joint>
+
+<joint name="Index_DIP" type="continuous">
+  <origin xyz="0.0 0.0 0.032" rpy="0 0 0"/>
+  <parent link="Index_Middle_1"/>
+  <child link="Index_Distal_1"/>
+  <axis xyz="-0.99863 0.052336 0.0"/>
+</joint>
+
+<joint name="Thumb_IP" type="continuous">
+  <origin xyz="-0.017301 -4.1e-05 0.030425" rpy="0 0 0"/>
+  <parent link="Thumb_Proximal_1"/>
+  <child link="Thumb_Distal_1"/>
+  <axis xyz="-0.788081 0.422615 -0.447577"/>
+</joint>
+
+<joint name="Thumb_Base" type="fixed">
+  <origin xyz="-0.018032 0.003966 0.045336" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Thumb_Base_1"/>
+</joint>
+
+<joint name="Thumb_CMC" type="continuous">
+  <origin xyz="-0.008953 0.008162 -0.002204" rpy="0 0 0"/>
+  <parent link="Thumb_Base_1"/>
+  <child link="Thumb_2dof_joint_1"/>
+  <axis xyz="0.494314 0.001155 -0.869283"/>
+</joint>
+
+</robot>

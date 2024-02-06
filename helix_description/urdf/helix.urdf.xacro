@@ -1,24 +1,23 @@
 <?xml version="1.0"?>
 <robot name="helix_description" xmlns:xacro="http://ros.org/wiki/xacro">
   
-  <xacro:include filename="$(find helix_description)/urdf/dynamixel_block.xacro" />
-  <xacro:include filename="$(find helix_description)/urdf/dynamixel_block.ros2_control.xacro" />
-
-  <xacro:include filename="$(find helix_description)/urdf/helix.xacro"  />
-
+  <xacro:include filename="$(find helix_description)/urdf/motor_head.xacro" />
+  <xacro:include filename="$(find helix_description)/urdf/helix.ros2_control.xacro" />
+  <!-- <xacro:include filename="$(find helix_description)/urdf/helix.xacro"  /> -->
 
   <link name="world"/>
 
-  <xacro:dynamixel_block_ros2_control name="dynamixel_block_ros2_control" />
+  <xacro:helix_ros2_control name="helix_ros2_control" />
 
-  <xacro:dynamixel_block parent="world">
+  <xacro:motor_head parent="world">
     <origin xyz="0 0 0" rpy="0 0 0" />
-  </xacro:dynamixel_block>
-
-  <joint name="hand_to_world" type="fixed">
+  </xacro:motor_head>
+  
+<!-- 
+  <joint name="motor_head_to_world" type="fixed">
     <origin xyz="0.0 0.0 0.1" rpy="0 0 0"/>
     <parent link="world"/>
-    <child link="base_link"/>
-  </joint>
+    <child link="base"/>
+  </joint> -->
 
 </robot>
