@@ -6,7 +6,7 @@ docker run -it --rm \
 --network=host \
 --ipc=host \
 --pid=host \
---env UID \
+--env UID=${MY_UID} \
 --env ROS_DOMAIN_ID \
 --privileged \
 --volume ./helix_bringup:/colcon_ws/src/helix_bringup \
