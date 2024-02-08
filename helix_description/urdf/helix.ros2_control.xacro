@@ -8,14 +8,14 @@
         <plugin>dynamixel_hardware/DynamixelHardware</plugin>
         <param name="usb_port">/dev/ttyUSB0</param>
         <param name="baud_rate">1000000</param>
-        <!-- <param name="use_dummy">true</param> -->
+        <param name="use_dummy">true</param>
       </hardware>
       <joint name="joint0">
         <!-- id is Dynamixel Motor ID -->
         <param name="id">0</param>
         <command_interface name="position"/>
         <!-- effort interface for current control -->
-        <command_interface name="effort"/>
+        <!-- <command_interface name="effort"/> -->
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
@@ -23,7 +23,7 @@
       <joint name="joint1">
         <param name="id">1</param>
         <command_interface name="position"/>
-        <command_interface name="effort"/>
+        <!-- <command_interface name="effort"/> -->
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
@@ -31,7 +31,7 @@
       <joint name="joint2">
         <param name="id">2</param>
         <command_interface name="position"/>
-        <command_interface name="effort"/>
+        <!-- <command_interface name="effort"/> -->
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
@@ -39,7 +39,7 @@
       <joint name="joint3">
         <param name="id">3</param>
         <command_interface name="position"/>
-        <command_interface name="effort"/>
+        <!-- <command_interface name="effort"/> -->
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
@@ -47,7 +47,7 @@
       <joint name="joint4">
         <param name="id">4</param>
         <command_interface name="position"/>
-        <command_interface name="effort"/>
+        <!-- <command_interface name="effort"/> -->
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
@@ -55,7 +55,7 @@
       <joint name="joint5">
         <param name="id">5</param>
         <command_interface name="position"/>
-        <command_interface name="effort"/>
+        <!-- <command_interface name="effort"/> -->
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
@@ -63,7 +63,7 @@
       <joint name="joint6">
         <param name="id">6</param>
         <command_interface name="position"/>
-        <command_interface name="effort"/>
+        <!-- <command_interface name="effort"/> -->
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
@@ -71,7 +71,7 @@
       <joint name="joint7">
         <param name="id">7</param>
         <command_interface name="position"/>
-        <command_interface name="effort"/>
+        <!-- <command_interface name="effort"/> -->
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
@@ -79,7 +79,7 @@
       <joint name="joint8">
         <param name="id">8</param>
         <command_interface name="position"/>
-        <command_interface name="effort"/>
+        <!-- <command_interface name="effort"/> -->
         <state_interface name="position"/>
         <state_interface name="velocity"/>
         <state_interface name="effort"/>

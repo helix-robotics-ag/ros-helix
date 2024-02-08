@@ -56,12 +56,12 @@ def generate_launch_description():
         output="screen",
     )
     
-    helix_joint_effort_controller_node = Node(
-            package="controller_manager",
-            executable="spawner",
-            arguments=["joint_effort_controller", "--inactive", "-c", "/controller_manager"],
-            output="screen",
-    )
+    # helix_joint_effort_controller_node = Node(
+    #         package="controller_manager",
+    #         executable="spawner",
+    #         arguments=["joint_effort_controller", "--inactive", "-c", "/controller_manager"],
+    #         output="screen",
+    # )
 
     helix_joint_state_broadcaster_node = Node(
         package="controller_manager",
@@ -76,7 +76,7 @@ def generate_launch_description():
     # ld.add_action(joint_state_publisher_node)
     ld.add_action(helix_ros2_control_node)
     ld.add_action(helix_joint_position_controller_node)
-    ld.add_action(helix_joint_effort_controller_node)
+    # ld.add_action(helix_joint_effort_controller_node)
     ld.add_action(helix_joint_state_broadcaster_node)
 
     return ld
