@@ -1,4 +1,4 @@
-ARG ROS_DISTRO=iron
+ARG ROS_DISTRO=humble
 
 FROM ros:${ROS_DISTRO}-ros-core
 
@@ -28,5 +28,5 @@ COPY dynamixel_hardware src/dynamixel_hardware
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh && colcon build --symlink-install --event-handlers console_direct+
 
 RUN echo 'alias build="colcon build --symlink-install  --event-handlers console_direct+"' >> ~/.bashrc
-RUN echo 'source /opt/ros/iron/setup.bash; source /colcon_ws/install/setup.bash; echo UID: $UID; echo ROS_DOMAIN_ID: $ROS_DOMAIN_ID; ros2 launch helix_bringup helix_bringup.launch.py' >> /run.sh && chmod +x /run.sh
+RUN echo 'source /opt/ros/humble/setup.bash; source /colcon_ws/install/setup.bash; echo UID: $UID; echo ROS_DOMAIN_ID: $ROS_DOMAIN_ID; ros2 launch helix_bringup helix_bringup.launch.py' >> /run.sh && chmod +x /run.sh
 RUN echo 'alias run="su - ros --whitelist-environment=\"ROS_DOMAIN_ID\" /run.sh"' >> /etc/bash.bashrc
