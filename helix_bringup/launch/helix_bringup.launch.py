@@ -30,7 +30,7 @@ def generate_launch_description():
     #     executable='joint_state_publisher',
     #     name='joint_state_publisher',
     #     parameters=[{
-    #         'source_list': ['helix_joint_state_publisher/joint_states','joint_state_broadcaster/joint_states'],
+    #         'source_list': ['joint_state_broadcaster/joint_states'],
     #     }]
     # )
 
@@ -52,7 +52,7 @@ def generate_launch_description():
     helix_joint_position_controller_node = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_position_controller", "--inactive", "-c", "/controller_manager"],
+        arguments=["joint_position_controller", "-c", "/controller_manager"],
         output="screen",
     )
     
@@ -67,7 +67,6 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
-        parameters=[controller_config],
         output="screen",
     )
 

@@ -37,6 +37,6 @@ joint_position_controller:
 #       - joint7
 #       - joint8
 
-joint_state_broadcaster:
-  ros__parameters:
-    use_local_topics: True
+# joint_state_broadcaster:
+#   ros__parameters:
+#     use_local_topics: True
