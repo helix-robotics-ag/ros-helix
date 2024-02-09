@@ -3,21 +3,20 @@
   
   <xacro:include filename="$(find helix_description)/urdf/motor_head.xacro" />
   <xacro:include filename="$(find helix_description)/urdf/helix.ros2_control.xacro" />
-  <!-- <xacro:include filename="$(find helix_description)/urdf/helix.xacro"  /> -->
+  <xacro:include filename="$(find helix_description)/urdf/helix_arm.xacro"  />
 
-  <link name="world"/>
+  <link name="origin"/>
 
   <xacro:helix_ros2_control name="helix_ros2_control" />
 
-  <xacro:motor_head parent="world">
+  <xacro:motor_head parent="origin">
     <origin xyz="0 0 0" rpy="0 0 0" />
   </xacro:motor_head>
   
-<!-- 
-  <joint name="motor_head_to_world" type="fixed">
-    <origin xyz="0.0 0.0 0.1" rpy="0 0 0"/>
-    <parent link="world"/>
-    <child link="base"/>
-  </joint> -->
+  <joint name="arm_to_origin" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="3.14 0 0"/>
+    <parent link="origin"/>
+    <child link="Index_Base_1"/>
+  </joint>
 
 </robot>

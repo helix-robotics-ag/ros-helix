@@ -42,6 +42,7 @@
   </link>
 
   <!-- Joint 0 -->
+  <!-- TODO check changing to continuous, removing limits -->
   <joint name="joint0" type="revolute">
     <parent link="base"/>
     <child link="link0"/>
@@ -55,9 +56,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0"/>
       <geometry>
-        <mesh filename="$(arg mesh_url)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
+        <cylinder length="0.015" radius="0.02"/>
       </geometry>
-      <material name="dynamixel_horn"/>
+      <material name="black"/>
     </visual>
   </link>
 
@@ -75,9 +76,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0"/>
       <geometry>
-        <mesh filename="$(arg mesh_url)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
+        <cylinder length="0.015" radius="0.02"/>
       </geometry>
-      <material name="dynamixel_horn"/>
+      <material name="black"/>
     </visual>
   </link>
 
@@ -95,9 +96,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0"/>
       <geometry>
-        <mesh filename="$(arg mesh_url)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
+        <cylinder length="0.015" radius="0.02"/>
       </geometry>
-      <material name="dynamixel_horn"/>
+      <material name="black"/>
     </visual>
   </link>
 
@@ -115,9 +116,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0"/>
       <geometry>
-        <mesh filename="$(arg mesh_url)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
+        <cylinder length="0.015" radius="0.02"/>
       </geometry>
-      <material name="dynamixel_horn"/>
+      <material name="black"/>
     </visual>
   </link>
 
@@ -135,9 +136,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0"/>
       <geometry>
-        <mesh filename="$(arg mesh_url)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
+        <cylinder length="0.015" radius="0.02"/>
       </geometry>
-      <material name="dynamixel_horn"/>
+      <material name="black"/>
     </visual>
   </link>
 
@@ -155,9 +156,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0"/>
       <geometry>
-        <mesh filename="$(arg mesh_url)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
+        <cylinder length="0.015" radius="0.02"/>
       </geometry>
-      <material name="dynamixel_horn"/>
+      <material name="black"/>
     </visual>
   </link>
 
@@ -175,9 +176,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0"/>
       <geometry>
-        <mesh filename="$(arg mesh_url)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
+        <cylinder length="0.015" radius="0.02"/>
       </geometry>
-      <material name="dynamixel_horn"/>
+      <material name="black"/>
     </visual>
   </link>
 
@@ -195,9 +196,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0"/>
       <geometry>
-        <mesh filename="$(arg mesh_url)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
+        <cylinder length="0.015" radius="0.02"/>
       </geometry>
-      <material name="dynamixel_horn"/>
+      <material name="black"/>
     </visual>
   </link>
 
@@ -215,9 +216,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0"/>
       <geometry>
-        <mesh filename="$(arg mesh_url)/meshes/horn_0_1.stl" scale="0.001 0.001 0.001"/>
+        <cylinder length="0.015" radius="0.02"/>
       </geometry>
-      <material name="dynamixel_horn"/>
+      <material name="black"/>
     </visual>
   </link>
 
