@@ -42,13 +42,11 @@
   </link>
 
   <!-- Joint 0 -->
-  <!-- TODO check changing to continuous, removing limits -->
-  <joint name="joint0" type="revolute">
+  <joint name="joint0" type="continuous">
     <parent link="base"/>
     <child link="link0"/>
     <origin xyz="-0.043 0.025 0.12" rpy="0 0 4.2"/>
     <axis xyz="1 0 0"/>
-    <limit velocity="4.8" effort="1" lower="-3.0" upper="3.0" />
   </joint>
 
    <!-- Link 0 -->
@@ -63,12 +61,11 @@
   </link>
 
   <!-- Joint 1 -->
-  <joint name="joint1" type="revolute">
+  <joint name="joint1" type="continuous">
     <parent link="base"/>
     <child link="link1"/>
     <origin xyz="0 -0.05 0.12" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit velocity="4.8" effort="1" lower="-3.0" upper="3.0" />
   </joint>
 
    <!-- Link 1 -->
@@ -83,12 +80,12 @@
   </link>
 
   <!-- Joint 2 -->
-  <joint name="joint2" type="revolute">
+  <joint name="joint2" type="continuous">
     <parent link="base"/>
     <child link="link2"/>
     <origin xyz="0.043 0.025 0.12" rpy="0 0 2.1"/>
     <axis xyz="1 0 0"/>
-    <limit velocity="4.8" effort="1" lower="-3.0" upper="3.0" />
+    continuous
   </joint>
 
    <!-- Link 2 -->
@@ -103,12 +100,11 @@
   </link>
 
   <!-- Joint 3 -->
-  <joint name="joint3" type="revolute">
+  <joint name="joint3" type="continuous">
     <parent link="base"/>
     <child link="link3"/>
     <origin xyz="0.16 0 0.025" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit velocity="4.8" effort="1" lower="-3.0" upper="3.0" />
   </joint>
 
    <!-- Link 3 -->
@@ -123,12 +119,11 @@
   </link>
 
   <!-- Joint 4 -->
-  <joint name="joint4" type="revolute">
+  <joint name="joint4" type="continuous">
     <parent link="base"/>
     <child link="link4"/>
     <origin xyz="-0.08 0.138 0.025" rpy="0 0 2.1"/>
     <axis xyz="1 0 0"/>
-    <limit velocity="4.8" effort="1" lower="-3.0" upper="3.0" />
   </joint>
 
    <!-- Link 4 -->
@@ -143,12 +138,11 @@
   </link>
 
   <!-- Joint 5 -->
-  <joint name="joint5" type="revolute">
+  <joint name="joint5" type="continuous">
     <parent link="base"/>
     <child link="link5"/>
     <origin xyz="-0.08 -0.138 0.025" rpy="0 0 4.2"/>
     <axis xyz="1 0 0"/>
-    <limit velocity="4.8" effort="1" lower="-3.0" upper="3.0" />
   </joint>
 
    <!-- Link 5 -->
@@ -163,12 +157,11 @@
   </link>
 
   <!-- Joint 6 -->
-  <joint name="joint6" type="revolute">
+  <joint name="joint6" type="continuous">
     <parent link="base"/>
     <child link="link6"/>
     <origin xyz="0.08 -0.138 0.025" rpy="0 0 5.2"/>
     <axis xyz="1 0 0"/>
-    <limit velocity="4.8" effort="1" lower="-3.0" upper="3.0" />
   </joint>
 
    <!-- Link 6 -->
@@ -183,12 +176,11 @@
   </link>
 
   <!-- Joint 7 -->
-  <joint name="joint7" type="revolute">
+  <joint name="joint7" type="continuous">
     <parent link="base"/>
     <child link="link7"/>
     <origin xyz="0.08 0.138 0.025" rpy="0 0 1.0"/>
     <axis xyz="1 0 0"/>
-    <limit velocity="4.8" effort="1" lower="-3.0" upper="3.0" />
   </joint>
 
    <!-- Link 7 -->
@@ -203,12 +195,11 @@
   </link>
 
   <!-- Joint 8 -->
-  <joint name="joint8" type="revolute">
+  <joint name="joint8" type="continuous">
     <parent link="base"/>
     <child link="link8"/>
     <origin xyz="-0.16 0 0.025" rpy="0 0 3.1"/>
     <axis xyz="1 0 0"/>
-    <limit velocity="4.8" effort="1" lower="-3.0" upper="3.0" />
   </joint>
 
    <!-- Link 8 -->
