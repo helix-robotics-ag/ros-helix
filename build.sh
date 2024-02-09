@@ -1,5 +1,5 @@
 #!/bin/bash
 
-REPOSITORY_NAME="$(basename "$(dirname -- "$( readlink -f -- "$0"; )")")"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-docker build --progress=plain -t ghcr.io/helix-robotics-ag/${REPOSITORY_NAME}:iron .
+docker compose -f $SCRIPT_DIR/docker-compose.yml build 

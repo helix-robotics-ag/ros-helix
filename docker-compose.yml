@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  ros-helix:
+    image: ghcr.io/helix-robotics-ag/ros-helix:iron
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    network_mode: "host"
+    ipc: host
+    pid: host
+    environment:
+      - UID=${HOST_UID}
+      - ROS_DOMAIN_ID
+    command: su - ros --whitelist-environment=ROS_DOMAIN_ID /run.sh
