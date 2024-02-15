@@ -6,6 +6,8 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch_ros.actions import Node
+# from launch.actions import RegisterEventHandler
+# from launch.event_handlers import OnProcessExit
 
 def generate_launch_description():
 
@@ -53,6 +55,14 @@ def generate_launch_description():
         output="screen",
     )
 
+    # ros2_control 'controller' (broadcaster) for motor joint states
+    motor_head_joint_state_broadcaster_node = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["motor_head_joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        output="screen",
+    )
+
     # ros2_control controller for motor joint positions
     motor_head_joint_position_controller_node = Node(
         package="controller_manager",
@@ -62,27 +72,27 @@ def generate_launch_description():
     )
     
     # ros2_control controller for motor joint efforts
-    # motor_head_helix_joint_effort_controller_node = Node(
-    #         package="controller_manager",
-    #         executable="spawner",
-    #         arguments=["motor_head_joint_effort_controller", "--inactive", "-c", "/controller_manager"],
-    #         output="screen",
-    # )
-
-    # ros2_control 'controller' (broadcaster) for motor joint states
-    motor_head_joint_state_broadcaster_node = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["motor_head_joint_state_broadcaster", "--controller-manager", "/controller_manager"],
-        output="screen",
+    motor_head_helix_joint_effort_controller_node = Node(
+            package="controller_manager",
+            executable="spawner",
+            arguments=["motor_head_joint_effort_controller", "--inactive", "-c", "/controller_manager"],
+            output="screen",
     )
 
+    # # Delay start of motor_head_joint_position_controller_node after `motor_head_joint_state_broadcaster_node`
+    # delay_joint_controller_after_broadcaster = RegisterEventHandler(
+    #     event_handler=OnProcessExit(
+    #         target_action=motor_head_joint_state_broadcaster_node,
+    #         on_exit=[motor_head_joint_position_controller_node],
+    #     )
+    # )
 
     ld.add_action(robot_state_publisher)
     ld.add_action(joint_state_publisher_node)
     ld.add_action(helix_ros2_control_node)
     ld.add_action(motor_head_joint_position_controller_node)
-    # ld.add_action(motor_head_helix_joint_effort_controller_node)
+    ld.add_action(motor_head_helix_joint_effort_controller_node)
     ld.add_action(motor_head_joint_state_broadcaster_node)
+    # ld.add_action(delay_joint_controller_after_broadcaster)
 
     return ld
