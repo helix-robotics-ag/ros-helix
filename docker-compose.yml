@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    restart: always
+    restart: "no"
     network_mode: "host"
     privileged: true
     ipc: host
