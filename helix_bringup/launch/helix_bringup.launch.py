@@ -87,6 +87,13 @@ def generate_launch_description():
     #     )
     # )
 
+    tendon_transmission_node = Node(
+        package="helix_transmission",
+        executable="tendon_transmission_node",
+        name="tendon_transmission_node",
+        output="screen",
+    )
+
     ld.add_action(robot_state_publisher)
     ld.add_action(joint_state_publisher_node)
     ld.add_action(helix_ros2_control_node)
@@ -94,5 +101,6 @@ def generate_launch_description():
     ld.add_action(motor_head_helix_joint_effort_controller_node)
     ld.add_action(motor_head_joint_state_broadcaster_node)
     # ld.add_action(delay_joint_controller_after_broadcaster)
+    ld.add_action(tendon_transmission_node)
 
     return ld
