@@ -79,19 +79,14 @@ def generate_launch_description():
             output="screen",
     )
 
-    # # Delay start of motor_head_joint_position_controller_node after `motor_head_joint_state_broadcaster_node`
-    # delay_joint_controller_after_broadcaster = RegisterEventHandler(
-    #     event_handler=OnProcessExit(
-    #         target_action=motor_head_joint_state_broadcaster_node,
-    #         on_exit=[motor_head_joint_position_controller_node],
-    #     )
-    # )
+    helix_transmission_params = os.path.join(get_package_share_directory('helix_transmission'),'config','helix_transmission.config.yml')
 
     tendon_transmission_node = Node(
         package="helix_transmission",
         executable="tendon_transmission_node",
         name="tendon_transmission_node",
         output="screen",
+        parameters = [helix_transmission_params],
     )
 
     ld.add_action(robot_state_publisher)
@@ -100,7 +95,6 @@ def generate_launch_description():
     ld.add_action(motor_head_joint_position_controller_node)
     ld.add_action(motor_head_helix_joint_effort_controller_node)
     ld.add_action(motor_head_joint_state_broadcaster_node)
-    # ld.add_action(delay_joint_controller_after_broadcaster)
     ld.add_action(tendon_transmission_node)
 
     return ld
