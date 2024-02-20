@@ -4,7 +4,8 @@ tendon_transmission_node:
     # For Motor 0,1,2,3,4,5 increasing rotor position/positive torque -> contraction
     # For Motor 6,7,8 decreasing rotor position/negative torque -> contraction 
     motor_orients: [1, 1, 1, 1, 1, 1, -1, -1, -1]
-    tendon_min_lim: -0.1
-    tendon_max_lim: 0.1
+    tendon_min_lim: -0.1  # [m]
+    tendon_max_lim: 0.1  # [m]
+    holding_current: 70.0  # [mA]
     # TODO - a better solution for the calibration file
     tendon_calib_file_path: "/colcon_ws/src/helix_transmission/config/tendon_calib.yml"
