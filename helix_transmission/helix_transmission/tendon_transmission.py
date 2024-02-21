@@ -90,6 +90,9 @@ class TendonTransmissionNode(Node):
         
         self.set_motor_offsets_srv = self.create_service(
             Trigger, '~/set_motor_offsets', self.set_motor_offsets_cb, callback_group=service_cb_group)
+        
+        self.check_calibration_srv = self.create_service(
+            Trigger, '~/check_calibration', self.check_calibration_cb, callback_group=service_cb_group)
 
     # Callbacks for motor<->tendon transmission
     def tendon_to_motor_command_cb(self, msg):
@@ -106,7 +109,7 @@ class TendonTransmissionNode(Node):
         tendon_state = JointState()
         motor_names = sorted(msg.name)
         motor_angs = [msg.position[msg.name.index(motor_name)] for motor_name in motor_names]
-        self.last_motor_joint_positions = motor_angs
+        self.last_motor_joint_positions = np.array(motor_angs, dtype=np.float64)
         motor_angvels = [msg.velocity[msg.name.index(motor_name)] for motor_name in motor_names]
         motor_currents = [msg.effort[msg.name.index(motor_name)] for motor_name in motor_names]
         tendon_state.name = motor_names
@@ -139,19 +142,36 @@ class TendonTransmissionNode(Node):
         return response
     
     def set_motor_offsets_cb(self, request, response):
+        write_succeeded = self.write_motor_offsets(self.last_motor_joint_positions.tolist())
+        if write_succeeded:
+            response.success = True
+        else:
+            response.success = False
+            response.message = 'Failed to set motor offsets file'
+        return response            
+        
+    def check_calibration_cb(self, request, response):
+        recalibrated_offsets = self.MOTOR_OFFSETS \
+            + 2*np.pi * np.round((self.last_motor_joint_positions-self.MOTOR_OFFSETS) / (2*np.pi))
+        write_succeeded = self.write_motor_offsets(recalibrated_offsets.tolist())
+        if write_succeeded:
+            response.success = True
+        else:
+            response.success = False
+            response.message = 'Failed to update motor offsets file'
+        return response   
+        
+    def write_motor_offsets(self, new_offsets):
         try:
             with open(self.get_parameter('tendon_calib_file_path').value + '.bak', 'w') as backup:
                 yaml.dump({'motor_offsets': self.MOTOR_OFFSETS}, backup)
             with open(self.get_parameter('tendon_calib_file_path').value, 'w') as file:
-                self.MOTOR_OFFSETS = self.last_motor_joint_positions
+                self.MOTOR_OFFSETS = new_offsets
                 yaml.dump({'motor_offsets': self.MOTOR_OFFSETS}, file)
-            response.success = True
-            return response
+            return True
         except (FileNotFoundError, yaml.YAMLError, TypeError):
             self.get_logger().info('Failed to write motor offsets to file')
-            response.success = False
-            response.message = 'Failed to write motor offsets to file'
-            return response
+            return False
 
 
 def main(args=None):
