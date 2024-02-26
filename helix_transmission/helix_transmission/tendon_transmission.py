@@ -49,7 +49,7 @@ class TendonTransmissionNode(Node):
         # Subscription/publication for motor<->tendon transmission
         self.tendon_command_sub = self.create_subscription(
             Float64MultiArray, 
-            '/helix_arm_tendons/command', 
+            '~/command', 
             self.tendon_to_motor_command_cb,
             10)
         self.tendon_command_sub
@@ -68,7 +68,7 @@ class TendonTransmissionNode(Node):
         
         self.tendon_state_pub = self.create_publisher(
             JointState,
-            '/helix_arm_tendons/tendon_states',
+            '~/tendon_states',
             10)
         
         # Publisher for motor current holding current
@@ -85,8 +85,12 @@ class TendonTransmissionNode(Node):
 
         service_cb_group = MutuallyExclusiveCallbackGroup()
 
+        # TODO - make custom services work over rosbridge so can have one parametrised set current service
         self.set_holding_current_srv = self.create_service(
             Trigger, '~/set_holding_current', self.set_holding_current_cb, callback_group=service_cb_group)
+        
+        self.unwind_srv = self.create_service(
+            Trigger, '~/unwind', self.unwind_cb, callback_group=service_cb_group)
         
         self.set_motor_offsets_srv = self.create_service(
             Trigger, '~/set_motor_offsets', self.set_motor_offsets_cb, callback_group=service_cb_group)
@@ -127,7 +131,7 @@ class TendonTransmissionNode(Node):
         controller_switch_req = SwitchController.Request()
         controller_switch_req.activate_controllers = ['motor_head_joint_effort_controller']
         controller_switch_req.deactivate_controllers = ['motor_head_joint_position_controller']
-        controller_switch_req.strictness = SwitchController.Request.STRICT
+        controller_switch_req.strictness = SwitchController.Request.BEST_EFFORT
         controller_switch_future = self.controller_switch_cli.call_async(controller_switch_req)
         while self.executor.spin_until_future_complete(controller_switch_future):
             self.get_logger().info("Waiting for controller switch to complete")
@@ -138,6 +142,26 @@ class TendonTransmissionNode(Node):
             return response
         self.motor_effort_command_pub.publish(
             Float64MultiArray(data = self.HOLDING_CURRENT * self.MOTOR_ORIENTS))
+        response.success = True
+        return response
+    
+    def unwind_cb(self, request, response):
+        while not self.controller_switch_cli.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('Waiting for controller switch service')
+        controller_switch_req = SwitchController.Request()
+        controller_switch_req.activate_controllers = ['motor_head_joint_effort_controller']
+        controller_switch_req.deactivate_controllers = ['motor_head_joint_position_controller']
+        controller_switch_req.strictness = SwitchController.Request.STRICT
+        controller_switch_future = self.controller_switch_cli.call_async(controller_switch_req)
+        while self.executor.spin_until_future_complete(controller_switch_future):
+            self.get_logger().info("Waiting for controller switch to complete")
+        if controller_switch_future.result().ok == False:
+            self.get_logger().error('Failed to switch to effort controller')
+            response.success = False
+            response.message = 'Failed to switch to effort controller'
+            return response
+        self.motor_effort_command_pub.publish(
+            Float64MultiArray(data = -3.0 * self.MOTOR_ORIENTS))
         response.success = True
         return response
     
