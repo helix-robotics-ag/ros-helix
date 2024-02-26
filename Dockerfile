@@ -23,6 +23,7 @@ COPY ros_entrypoint.sh .
 WORKDIR /colcon_ws
 COPY helix_bringup src/helix_bringup
 COPY helix_description src/helix_description
+COPY helix_transmission src/helix_transmission
 COPY dynamixel_hardware src/dynamixel_hardware
 
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh && colcon build --symlink-install --event-handlers console_direct+
