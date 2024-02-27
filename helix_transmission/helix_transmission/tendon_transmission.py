@@ -47,12 +47,12 @@ class TendonTransmissionNode(Node):
         self.last_motor_joint_positions = None
 
         # Subscription/publication for motor<->tendon transmission
-        self.tendon_command_sub = self.create_subscription(
+        self.tendon_commands_sub = self.create_subscription(
             Float64MultiArray, 
-            '~/command', 
+            '~/commands', 
             self.tendon_to_motor_command_cb,
             10)
-        self.tendon_command_sub
+        self.tendon_commands_sub
 
         self.motor_state_sub = self.create_subscription(
             JointState, 
@@ -86,11 +86,20 @@ class TendonTransmissionNode(Node):
         service_cb_group = MutuallyExclusiveCallbackGroup()
 
         # TODO - make custom services work over rosbridge so can have one parametrised set current service
+        self.switch_to_current_control = self.create_service(
+            Trigger, '~/switch_to_current_control', self.switch_to_current_control_cb, callback_group=service_cb_group)
+
+        self.switch_to_position_control = self.create_service(
+            Trigger, '~/switch_to_position_control', self.switch_to_position_control_cb, callback_group=service_cb_group)
+
         self.set_holding_current_srv = self.create_service(
             Trigger, '~/set_holding_current', self.set_holding_current_cb, callback_group=service_cb_group)
         
         self.unwind_srv = self.create_service(
-            Trigger, '~/unwind', self.unwind_cb, callback_group=service_cb_group)
+            Trigger, '~/set_unwind_current', self.set_unwind_current_cb, callback_group=service_cb_group)
+        
+        self.unwind_srv = self.create_service(
+            Trigger, '~/set_zero_current', self.set_zero_current_cb, callback_group=service_cb_group)
         
         self.set_motor_offsets_srv = self.create_service(
             Trigger, '~/set_motor_offsets', self.set_motor_offsets_cb, callback_group=service_cb_group)
@@ -124,8 +133,8 @@ class TendonTransmissionNode(Node):
         tendon_state.effort = motor_currents
         self.tendon_state_pub.publish(tendon_state)
 
-    # Callbacks for calibration
-    def set_holding_current_cb(self, request, response):
+    # Callbacks for controller switching
+    def switch_to_current_control_cb(self, request, response):
         while not self.controller_switch_cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('Waiting for controller switch service')
         controller_switch_req = SwitchController.Request()
@@ -140,28 +149,43 @@ class TendonTransmissionNode(Node):
             response.success = False
             response.message = 'Failed to switch to effort controller'
             return response
+        response.success = True
+        return response
+
+    def switch_to_position_control_cb(self, request, response):
+        while not self.controller_switch_cli.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('Waiting for controller switch service')
+        controller_switch_req = SwitchController.Request()
+        controller_switch_req.activate_controllers = ['motor_head_joint_position_controller']
+        controller_switch_req.deactivate_controllers = ['motor_head_joint_effort_controller']
+        controller_switch_req.strictness = SwitchController.Request.BEST_EFFORT
+        controller_switch_future = self.controller_switch_cli.call_async(controller_switch_req)
+        while self.executor.spin_until_future_complete(controller_switch_future):
+            self.get_logger().info("Waiting for controller switch to complete")
+        if controller_switch_future.result().ok == False:
+            self.get_logger().error('Failed to switch to position controller')
+            response.success = False
+            response.message = 'Failed to switch to position controller'
+            return response
+        response.success = True
+        return response
+
+    # Callbacks for calibration
+    def set_holding_current_cb(self, request, response):
         self.motor_effort_command_pub.publish(
             Float64MultiArray(data = self.HOLDING_CURRENT * self.MOTOR_ORIENTS))
         response.success = True
         return response
     
-    def unwind_cb(self, request, response):
-        while not self.controller_switch_cli.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('Waiting for controller switch service')
-        controller_switch_req = SwitchController.Request()
-        controller_switch_req.activate_controllers = ['motor_head_joint_effort_controller']
-        controller_switch_req.deactivate_controllers = ['motor_head_joint_position_controller']
-        controller_switch_req.strictness = SwitchController.Request.STRICT
-        controller_switch_future = self.controller_switch_cli.call_async(controller_switch_req)
-        while self.executor.spin_until_future_complete(controller_switch_future):
-            self.get_logger().info("Waiting for controller switch to complete")
-        if controller_switch_future.result().ok == False:
-            self.get_logger().error('Failed to switch to effort controller')
-            response.success = False
-            response.message = 'Failed to switch to effort controller'
-            return response
+    def set_unwind_current_cb(self, request, response):
         self.motor_effort_command_pub.publish(
             Float64MultiArray(data = -3.0 * self.MOTOR_ORIENTS))
+        response.success = True
+        return response
+    
+    def set_zero_current_cb(self, request, response):
+        self.motor_effort_command_pub.publish(
+            Float64MultiArray(data = 0.0 * self.MOTOR_ORIENTS))
         response.success = True
         return response
     
