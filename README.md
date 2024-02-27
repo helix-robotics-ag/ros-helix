@@ -1,7 +1,7 @@
 # Calibration and Tendon Commands
 The `helix_transmission` package provides an interface for commanding the tendons of the robot, instead of the motors directly:
-- Command tendon length instead of rotor angle (abstract pulley ratio)
-- Command tendon contraction/relaxation with consistent sign (abstract motor orientation), and also with limits applied
+- Command tendon length instead of rotor angle, and also with limits applied
+- Command tendon contraction/relaxation with consistent sign (convert the motor orientation)
 - Allow for setting a tendon 'zero' position and using this as the command reference (calibrate motor positions)
   
 Relevant parameters are stored in the [config](https://github.com/helix-robotics-ag/ros-helix/blob/main/helix_transmission/config/helix_transmission.config.yml), except the motor position calibrations for the tendon zero, which are saved into an untracked file in the same directory. 
@@ -41,12 +41,23 @@ Switch back to position control mode:
 ```
 srv = roslibpy.Service(client, '/tendon_transmission_node/switch_to_position_control', 'std_srvs/Trigger')
 ```
-### Use Tendon Commands
+## Use Tendon Commands
 The `/tendon_transmission_node/tendon_states` topic publishes the tendon lengths. Publishing to the `/tendon_transmission_node/commands` topic will command the tendon lengths, ie publishing `{'data': [0,0,0,0,0,0,0,0,0]})` will set the motor positions to the positions saved in the calibration file; publishing `{'data': [0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01]})` will contract all tendons by 1cm.
-### Checking the zero state
+
+## Checking the zero state
 The motors' absolute positions may be lost after shutting down. To check that they are still correct, follow the above steps up to applying the holding current, then call:
 ```
 srv = roslibpy.Service(client, '/tendon_transmission_node/check_calibration', 'std_srvs/Trigger')
 ```
-This will check whether the motor positions are within half a turn of the calibration, and offset the calibration file with additional revolutions if not. This should be done after each launch (automated process TBC).
+This will check whether the motor positions are within half a turn of the calibration, and offset the calibration file with additional revolutions if not. **This should be done after each launch (automated process TBC).**
 
+# Commanding Motor Controllers Directly
+The motor controllers are still available to command directly, but there are some things to be aware of.
+### Read the motor joint states
+On the topic `/motor_head_joint_state_broadcaster/joint_states`. **Note: on this topic the joint states are not broadcast in order, you need to refer to the 'names' field of the message to match them. This is the only place where this is the case, all other joint and tendon broadcast or command topics are in order 0-8.**
+### Command motor positions
+On the topic `/motor_head_joint_position_controller/commands`. Units are radians and you need to take into account the orientation of the motors (increasing turns anticlockwise).
+### Command motor currents
+On the topic `/motor_head_joint_position_controller/commands`. Units are mA and you need to take into account the orientation of the motors (positive turns anticlockwise).
+
+The right controller needs to be active to command it (best to use the switch controller services on `/tendon_transmission_node/` to avoid activating them both at the same time).
