@@ -47,12 +47,12 @@ class TendonTransmissionNode(Node):
         self.last_motor_joint_positions = None
 
         # Subscription/publication for motor<->tendon transmission
-        self.tendon_command_sub = self.create_subscription(
+        self.tendon_commands_sub = self.create_subscription(
             Float64MultiArray, 
-            '~/command', 
+            '~/commands', 
             self.tendon_to_motor_command_cb,
             10)
-        self.tendon_command_sub
+        self.tendon_commands_sub
 
         self.motor_state_sub = self.create_subscription(
             JointState, 
@@ -154,7 +154,7 @@ class TendonTransmissionNode(Node):
         controller_switch_req = SwitchController.Request()
         controller_switch_req.activate_controllers = ['motor_head_joint_effort_controller']
         controller_switch_req.deactivate_controllers = ['motor_head_joint_position_controller']
-        controller_switch_req.strictness = SwitchController.Request.STRICT
+        controller_switch_req.strictness = SwitchController.Request.BEST_EFFORT
         controller_switch_future = self.controller_switch_cli.call_async(controller_switch_req)
         while self.executor.spin_until_future_complete(controller_switch_future):
             self.get_logger().info("Waiting for controller switch to complete")
@@ -174,7 +174,7 @@ class TendonTransmissionNode(Node):
         controller_switch_req = SwitchController.Request()
         controller_switch_req.activate_controllers = ['motor_head_joint_effort_controller']
         controller_switch_req.deactivate_controllers = ['motor_head_joint_position_controller']
-        controller_switch_req.strictness = SwitchController.Request.STRICT
+        controller_switch_req.strictness = SwitchController.Request.BEST_EFFORT
         controller_switch_future = self.controller_switch_cli.call_async(controller_switch_req)
         while self.executor.spin_until_future_complete(controller_switch_future):
             self.get_logger().info("Waiting for controller switch to complete")
