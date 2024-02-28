@@ -1,2 +1,4 @@
 helix_transmission/config/tendon_calib.yml
 helix_transmission/config/tendon_calib.yml.bak
+
+__pycache__
