@@ -30,9 +30,9 @@ class TendonTransmissionNode(Node):
             self.get_logger().info('No configuration file found, setting defaults')
             with open(self.path_to_config, 'w') as file:
                 self.PULLEY_RADIUS = 0.01  # [m]
-                self.MOTOR_ORIENTS = np.array([-1, -1, -1, -1, -1, -1, 1, 1, 1], dtype=np.float64)  # +ve anticlockwise
+                self.MOTOR_ORIENTS = np.array([1, 1, 1, 1, 1, 1, -1, -1, -1], dtype=np.float64)  # +ve anticlockwise
                 self.TENDON_LIMITS = np.array([-0.1, 0.1], dtype=np.float64)  # [m]
-                self.HOLDING_CURRENT = 70.0  # [mA]
+                self.HOLDING_CURRENT = -70.0  # [mA]
                 yaml.dump({
                     'pulley_radius': self.PULLEY_RADIUS,
                     'motor_orients': self.MOTOR_ORIENTS.tolist(),
@@ -192,7 +192,7 @@ class TendonTransmissionNode(Node):
     
     def set_unwind_current_cb(self, request, response):
         self.motor_effort_command_pub.publish(
-            Float64MultiArray(data = -3.0 * self.MOTOR_ORIENTS))
+            Float64MultiArray(data = 3.0 * self.MOTOR_ORIENTS))
         response.success = True
         return response
     
