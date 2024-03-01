@@ -15,27 +15,55 @@ class TendonTransmissionNode(Node):
     def __init__(self):
         super().__init__('tendon_transmission_node')
         
-        # Config from helix_transmission.config.yml
-        self.declare_parameters(
-            namespace='',
-            parameters=[
-                ('pulley_radius',rclpy.Parameter.Type.DOUBLE),
-                ('motor_orients',rclpy.Parameter.Type.INTEGER_ARRAY),
-                ('tendon_min_lim',rclpy.Parameter.Type.DOUBLE),
-                ('tendon_max_lim',rclpy.Parameter.Type.DOUBLE),
-                ('holding_current',rclpy.Parameter.Type.DOUBLE),
-                ('tendon_calib_file_path',rclpy.Parameter.Type.STRING)
-            ])
-        self.PULLEY_RADIUS = self.get_parameter('pulley_radius').value
-        self.MOTOR_ORIENTS = np.array(self.get_parameter('motor_orients').value, dtype=np.float64)
-        self.TENDON_LIMITS = np.array([self.get_parameter('tendon_min_lim').value,
-                                       self.get_parameter('tendon_max_lim').value])
-        self.HOLDING_CURRENT = self.get_parameter('holding_current').value
+        # # Config from helix_transmission.config.yml
+        # self.declare_parameters(
+        #     namespace='',
+        #     parameters=[
+        #         ('pulley_radius',rclpy.Parameter.Type.DOUBLE),
+        #         ('motor_orients',rclpy.Parameter.Type.INTEGER_ARRAY),
+        #         ('tendon_min_lim',rclpy.Parameter.Type.DOUBLE),
+        #         ('tendon_max_lim',rclpy.Parameter.Type.DOUBLE),
+        #         ('holding_current',rclpy.Parameter.Type.DOUBLE),
+        #         ('tendon_calib_file_path',rclpy.Parameter.Type.STRING)
+        #     ])
+        # self.PULLEY_RADIUS = self.get_parameter('pulley_radius').value
+        # self.MOTOR_ORIENTS = np.array(self.get_parameter('motor_orients').value, dtype=np.float64)
+        # self.TENDON_LIMITS = np.array([self.get_parameter('tendon_min_lim').value,
+        #                                self.get_parameter('tendon_max_lim').value])
+        # self.HOLDING_CURRENT = self.get_parameter('holding_current').value
+        self.path_to_config = '/home/ros/helix_config/helix_transmission.config.yml'
+        self.path_to_calib = '/home/ros/helix_config/tendon_calib.yml'
+
+        try:
+            with open(self.path_to_config, 'r') as file:
+                config = yaml.safe_load(file)
+                self.PULLEY_RADIUS = config['pulley_radius']
+                self.MOTOR_ORIENTS = np.array(config('motor_orients'), dtype=np.float64)
+                self.TENDON_LIMITS = np.array([config('tendon_min_lim'),
+                                               config('tendon_max_lim')])
+                self.HOLDING_CURRENT = config['holding_current']
+        except (FileNotFoundError):
+            self.get_logger().info('No configuration file found, setting defaults')
+            with open(self.path_to_config, 'w') as file:
+                self.PULLEY_RADIUS = 0.01  # [m]
+                self.MOTOR_ORIENTS = np.array([-1, -1, -1, -1, -1, -1, 1, 1, 1], dtype=np.float64)  # +ve anticlockwise
+                self.TENDON_LIMITS = np.array([-0.1, 0.1], dtype=np.float64)  # [m]
+                self.HOLDING_CURRENT = 70.0  # [mA]
+                yaml.dump({
+                    'pulley_radius': self.PULLEY_RADIUS,
+                    'motor_orients': self.MOTOR_ORIENTS,
+                    'tendon_min_lim': self.TENDON_LIMITS[0],
+                    'tendon_max_lim': self.TENDON_LIMITS[1],
+                    'holding_current': self.HOLDING_CURRENT
+                    }, file)
+        except (yaml.YAMLError, TypeError):
+            self.get_logger().error('Unable to read or write configuration file for startup')
+            return
 
         # Motor offsets from local tendon calibration file
         self.MOTOR_OFFSETS = np.array([0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=np.float64)
         try:
-            with open(self.get_parameter('tendon_calib_file_path').value, 'r') as file:
+            with open(self.path_to_calib, 'r') as file:
                 data = yaml.safe_load(file)
                 if 'motor_offsets' in data:
                     self.MOTOR_OFFSETS = data['motor_offsets']
@@ -211,9 +239,9 @@ class TendonTransmissionNode(Node):
         
     def write_motor_offsets(self, new_offsets):
         try:
-            with open(self.get_parameter('tendon_calib_file_path').value + '.bak', 'w') as backup:
+            with open(self.path_to_calib + '.bak', 'w') as backup:
                 yaml.dump({'motor_offsets': self.MOTOR_OFFSETS}, backup)
-            with open(self.get_parameter('tendon_calib_file_path').value, 'w') as file:
+            with open(self.path_to_calib, 'w') as file:
                 self.MOTOR_OFFSETS = new_offsets
                 yaml.dump({'motor_offsets': self.MOTOR_OFFSETS}, file)
             return True
