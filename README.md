@@ -3,14 +3,12 @@ The `helix_transmission` package provides an interface for commanding the tendon
 - Command tendon length instead of rotor angle, and also with limits applied
 - Command tendon contraction/relaxation with consistent sign (convert the motor orientation)
 - Allow for setting a tendon 'zero' position and using this as the command reference (calibrate motor positions)
-  
-Relevant parameters are stored in the [config](https://github.com/helix-robotics-ag/ros-helix/blob/main/helix_transmission/config/helix_transmission.config.yml), except the motor position calibrations for the tendon zero, which are saved into an untracked file in the same directory. 
+
+Relevant parameters are stored in a config file on the host Pi, in `~/.config/helix_transmission.config.yml`. These can be modified locally for the specific robot, eg if the motor orientations or pulley size changes. Note: currently `~/.config/` needs to be created on the Pi before first launching the container, to avoid issues with permissions after mounting the volume. A default `helix_transmission.config.yml` will be created when launching the container in the case that it doesn't exist yet.
 
 Using the interface is done through topics and services in the namespace `/tendon_transmission_node/`. See [this script](https://github.com/fstella97/HelixRobotics/blob/main/ROS/roslibpy_service_test.py) for an example of listing these, and calling a service through roslibpy.
 
 ## Calibrating Tendon Zero State
-**In order to save the calibration file, it is currently necessary to start the container with the run script: `./run.sh` (inside the ros-helix repo directory), then `run` on the resulting container command line. Starting with `docker compose up ros-helix` will not work since the volume where the file is saved is not mounted in the compose file (solution to this is TBC).** (Note the rest of the containers can be started as normal: `docker compose up nginx studio ros-foxglove-bridge ros-rosbridge-suite`.)
-
 Make sure all the containers are running and all the controllers started successfully.
 
 ### Switch to Current Control

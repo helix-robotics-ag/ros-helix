@@ -14,4 +14,6 @@ services:
     environment:
       - UID=${HOST_UID}
       - ROS_DOMAIN_ID
+    volumes:
+      - ~/.config:/tmp/config
     command: su - ros --whitelist-environment=ROS_DOMAIN_ID /run.sh
