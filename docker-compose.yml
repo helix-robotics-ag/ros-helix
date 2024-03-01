@@ -15,5 +15,5 @@ services:
       - UID=${HOST_UID}
       - ROS_DOMAIN_ID
     volumes:
-      - /home/lab/helix_config:/home/ros/helix_config
+      - ~/.config:/tmp/config
     command: su - ros --whitelist-environment=ROS_DOMAIN_ID /run.sh
