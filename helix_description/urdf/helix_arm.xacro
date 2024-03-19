@@ -7,9 +7,64 @@
 
 <xacro:include filename="$(find helix_description)/urdf/helix_arm.materials.xacro" />
 
+<link name="arm_base">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="white"/>
+  </visual>
+</link>
+
+<link name="seg1_end_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="white"/>
+  </visual>
+</link>
+
+<joint name="seg1_end_joint" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg1_end_link"/>
+</joint>
+
+<link name="seg2_end_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="white"/>
+  </visual>
+</link>
+
+<joint name="seg2_end_joint" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg2_end_link"/>
+</joint>
+
+<link name="seg3_end_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="white"/>
+  </visual>
+</link>
+
+<joint name="seg3_end_joint" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg3_end_link"/>
+</joint>
+
 <!-- Example below for a rigid serial chain. Maybe not relevant at all for flexible Helix arm representation. -->
 
-<link name="Index_Base_1">
+<!-- <link name="Index_Base_1">
   <inertial>
     <origin xyz="-0.007201714291713072 0.005885230272430774 0.0016787722912366132" rpy="0 0 0"/>
     <mass value="0.01722650129403022"/>
@@ -140,6 +195,6 @@
   <parent link="Index_Middle_1"/>
   <child link="Index_Distal_1"/>
   <axis xyz="-0.99863 0.052336 0.0"/>
-</joint>
+</joint> -->
 
 </robot>
