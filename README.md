@@ -4,7 +4,7 @@ The `helix_transmission` package provides an interface for commanding the tendon
 - Command tendon contraction/relaxation with consistent sign (convert the motor orientation)
 - Allow for setting a tendon 'zero' position and using this as the command reference (calibrate motor positions)
 
-Relevant parameters are stored in a config file on the host Pi, in `~/.config/helix/helix_transmission.config.yml`. These can be modified locally for the specific robot, eg if the motor orientations or pulley size changes. Note: currently `~/.config/helix` needs to be created on the Pi before first launching the container, to avoid issues with permissions after mounting the volume. A default `helix_transmission.config.yml` will be created when launching the container in the case that it doesn't exist yet.
+Relevant parameters are stored in a config file on the host Pi, in `~/.config/helix/helix_transmission.config.yml`. These can be modified locally for the specific robot, eg if the motor orientations or pulley size changes. Note: currently `~/.config/helix/` needs to be created on the Pi before first launching the container, to avoid issues with permissions after mounting the volume. A default `helix_transmission.config.yml` will be created when launching the container in the case that it doesn't exist yet.
 
 Using the interface is done through topics and services in the namespace `/tendon_transmission_node/`. See [this script](https://github.com/fstella97/HelixRobotics/blob/main/ROS/roslibpy_service_test.py) for an example of listing these, and calling a service through roslibpy.
 
