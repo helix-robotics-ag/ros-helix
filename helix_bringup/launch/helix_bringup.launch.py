@@ -79,14 +79,11 @@ def generate_launch_description():
             output="screen",
     )
 
-    helix_transmission_params = os.path.join(get_package_share_directory('helix_transmission'),'config','helix_transmission.config.yml')
-
     tendon_transmission_node = Node(
         package="helix_transmission",
         executable="tendon_transmission_node",
         name="tendon_transmission_node",
         output="screen",
-        parameters = [helix_transmission_params],
     )
 
     ld.add_action(robot_state_publisher)
