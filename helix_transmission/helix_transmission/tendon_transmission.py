@@ -10,7 +10,7 @@ from std_msgs.msg import Float64MultiArray
 from std_srvs.srv import Trigger
 from controller_manager_msgs.srv import SwitchController
 
-from helix_transmission_interfaces.srv import SetHoldingCurrent
+from helix_transmission_interfaces.srv import SetCurrent
 
 class TendonTransmissionNode(Node):
 
@@ -27,7 +27,7 @@ class TendonTransmissionNode(Node):
                 self.MOTOR_ORIENTS = np.array(config['motor_orients'], dtype=np.float64)
                 self.TENDON_LIMITS = np.array([config['tendon_min_lim'],
                                                config['tendon_max_lim']])
-                self.HOLDING_CURRENT = config['holding_current']
+                self.HOLDING_CURRENT = config['holding_current'] # TODO - remove so only defined in set current service?
         except (FileNotFoundError):
             self.get_logger().info('No configuration file found, setting defaults')
             with open(self.path_to_config, 'w') as file:
@@ -107,14 +107,17 @@ class TendonTransmissionNode(Node):
         self.switch_to_position_control = self.create_service(
             Trigger, '~/switch_to_position_control', self.switch_to_position_control_cb, callback_group=service_cb_group)
 
-        self.set_holding_current_srv = self.create_service(
-            Trigger, '~/set_holding_current', self.set_holding_current_cb, callback_group=service_cb_group)
+        self.set_current_srv = self.create_service(
+            SetCurrent, '~/set_current', self.set_current_cb, callback_group=service_cb_group)
+
+        # self.set_holding_current_srv = self.create_service(
+        #     Trigger, '~/set_holding_current', self.set_holding_current_cb, callback_group=service_cb_group)
         
-        self.unwind_srv = self.create_service(
-            Trigger, '~/set_unwind_current', self.set_unwind_current_cb, callback_group=service_cb_group)
+        # self.unwind_srv = self.create_service(
+        #     Trigger, '~/set_unwind_current', self.set_unwind_current_cb, callback_group=service_cb_group)
         
-        self.unwind_srv = self.create_service(
-            Trigger, '~/set_zero_current', self.set_zero_current_cb, callback_group=service_cb_group)
+        # self.unwind_srv = self.create_service(
+        #     Trigger, '~/set_zero_current', self.set_zero_current_cb, callback_group=service_cb_group)
         
         self.set_motor_offsets_srv = self.create_service(
             Trigger, '~/set_motor_offsets', self.set_motor_offsets_cb, callback_group=service_cb_group)
@@ -186,23 +189,29 @@ class TendonTransmissionNode(Node):
         return response
 
     # Callbacks for calibration
-    def set_holding_current_cb(self, request, response):
+    def set_current_cb(self, request, response):
         self.motor_effort_command_pub.publish(
-            Float64MultiArray(data = self.HOLDING_CURRENT * self.MOTOR_ORIENTS))
+            Float64MultiArray(data = request.current * self.MOTOR_ORIENTS))
         response.success = True
         return response
+
+    # def set_holding_current_cb(self, request, response):
+    #     self.motor_effort_command_pub.publish(
+    #         Float64MultiArray(data = self.HOLDING_CURRENT * self.MOTOR_ORIENTS))
+    #     response.success = True
+    #     return response
     
-    def set_unwind_current_cb(self, request, response):
-        self.motor_effort_command_pub.publish(
-            Float64MultiArray(data = 3.0 * self.MOTOR_ORIENTS))
-        response.success = True
-        return response
+    # def set_unwind_current_cb(self, request, response):
+    #     self.motor_effort_command_pub.publish(
+    #         Float64MultiArray(data = 3.0 * self.MOTOR_ORIENTS))
+    #     response.success = True
+    #     return response
     
-    def set_zero_current_cb(self, request, response):
-        self.motor_effort_command_pub.publish(
-            Float64MultiArray(data = 0.0 * self.MOTOR_ORIENTS))
-        response.success = True
-        return response
+    # def set_zero_current_cb(self, request, response):
+    #     self.motor_effort_command_pub.publish(
+    #         Float64MultiArray(data = 0.0 * self.MOTOR_ORIENTS))
+    #     response.success = True
+    #     return response
     
     def set_motor_offsets_cb(self, request, response):
         write_succeeded = self.write_motor_offsets(self.last_motor_joint_positions.tolist())
