@@ -1,4 +1,4 @@
-float64 current 70.0
+float64 current 0.0
 ---
 bool success
 string message
