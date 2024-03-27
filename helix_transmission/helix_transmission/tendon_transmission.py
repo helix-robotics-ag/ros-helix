@@ -27,14 +27,16 @@ class TendonTransmissionNode(Node):
                 self.MOTOR_ORIENTS = np.array(config['motor_orients'], dtype=np.float64)
                 self.TENDON_LIMITS = np.array([config['tendon_min_lim'],
                                                config['tendon_max_lim']])
-                self.HOLDING_CURRENT = config['holding_current'] # TODO - remove so only defined in set current service?
+                self.HOLDING_CURRENT = config['holding_current'] 
         except (FileNotFoundError):
             self.get_logger().info('No configuration file found, setting defaults')
             with open(self.path_to_config, 'w') as file:
                 self.PULLEY_RADIUS = 0.01  # [m]
                 self.MOTOR_ORIENTS = np.array([1, 1, 1, 1, 1, 1, -1, -1, -1], dtype=np.float64)  # +ve anticlockwise
                 self.TENDON_LIMITS = np.array([-0.1, 0.1], dtype=np.float64)  # [m]
-                self.HOLDING_CURRENT = -70.0  # [mA]
+                # TODO - remove holding current definition if not needed here. It could be kept here and exposed
+                # somehow to make the default value accesible from all interfaces, or just documented.
+                self.HOLDING_CURRENT = -70.0  # [mA] 
                 yaml.dump({
                     'pulley_radius': self.PULLEY_RADIUS,
                     'motor_orients': self.MOTOR_ORIENTS.tolist(),
@@ -100,7 +102,6 @@ class TendonTransmissionNode(Node):
         service_cb_group = MutuallyExclusiveCallbackGroup()
 
         # Services for current setting and calibration
-        # TODO - make custom services work over rosbridge so can have one parametrised set current service
         self.switch_to_current_control = self.create_service(
             Trigger, '~/switch_to_current_control', self.switch_to_current_control_cb, callback_group=service_cb_group)
 
@@ -109,15 +110,6 @@ class TendonTransmissionNode(Node):
 
         self.set_current_srv = self.create_service(
             SetCurrent, '~/set_current', self.set_current_cb, callback_group=service_cb_group)
-
-        # self.set_holding_current_srv = self.create_service(
-        #     Trigger, '~/set_holding_current', self.set_holding_current_cb, callback_group=service_cb_group)
-        
-        # self.unwind_srv = self.create_service(
-        #     Trigger, '~/set_unwind_current', self.set_unwind_current_cb, callback_group=service_cb_group)
-        
-        # self.unwind_srv = self.create_service(
-        #     Trigger, '~/set_zero_current', self.set_zero_current_cb, callback_group=service_cb_group)
         
         self.set_motor_offsets_srv = self.create_service(
             Trigger, '~/set_motor_offsets', self.set_motor_offsets_cb, callback_group=service_cb_group)
@@ -194,24 +186,6 @@ class TendonTransmissionNode(Node):
             Float64MultiArray(data = request.current * self.MOTOR_ORIENTS))
         response.success = True
         return response
-
-    # def set_holding_current_cb(self, request, response):
-    #     self.motor_effort_command_pub.publish(
-    #         Float64MultiArray(data = self.HOLDING_CURRENT * self.MOTOR_ORIENTS))
-    #     response.success = True
-    #     return response
-    
-    # def set_unwind_current_cb(self, request, response):
-    #     self.motor_effort_command_pub.publish(
-    #         Float64MultiArray(data = 3.0 * self.MOTOR_ORIENTS))
-    #     response.success = True
-    #     return response
-    
-    # def set_zero_current_cb(self, request, response):
-    #     self.motor_effort_command_pub.publish(
-    #         Float64MultiArray(data = 0.0 * self.MOTOR_ORIENTS))
-    #     response.success = True
-    #     return response
     
     def set_motor_offsets_cb(self, request, response):
         write_succeeded = self.write_motor_offsets(self.last_motor_joint_positions.tolist())
