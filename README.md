@@ -1,5 +1,5 @@
 # Controlling the robot from an external device
-Note: Most of the instructions below will be described for an external device running native ROS. As Foxglove and `rosliby` provide ways for other devices that aren't running ROS to interact with the system from a browser or Python script respectively, the same instructions can be followed for those interfaces - the details for how this can be done are included later in the README. Please read the full set of instructions before using the system.
+Note: Most of the instructions below will be described for an external device running native ROS. As Foxglove and `roslibpy` provide ways for other devices that aren't running ROS to interact with the system from a browser or Python script respectively, the same instructions can be followed for those interfaces - the details for how this can be done are included later in the README. Please read the full set of instructions before using the system.
 
 ## Launching the embedded Helix ROS system
 From the Helix RPi terminal (assuming the Pi has previously been set up correctly):
@@ -34,10 +34,10 @@ To calibrate the nominal straightened zero configuration, follow this procedure:
 6. You can now switch back to position control mode by calling `/tendon_transmission_node/switch_to_position_control`
 
 ## Checking the zero state
-The motors' absolute positions may be lost after shutting down. To check that they are still correct, follow the above steps up to an including (4), then call `/tendon_transmission_node/check_calibration`. This will check whether the motor positions are within half a turn of the calibration, and offset the calibration file with additional revolutions if not. **This should be done whenever the motor controller is turned off and on.**
+The motors' absolute positions may be lost after shutting down. To check that they are still correct, follow the above steps up to and including (4), then call `/tendon_transmission_node/check_calibration`. This will check whether the motor positions are within half a turn of the calibration, and offset the calibration file with additional revolutions if not. **This should be done whenever the motor controller is turned off and on, to avoid accidentally overtensioning the arm.** Note that if in doubt, the state of the tendon lengths with the nominal tension current applied should all be within about 0.03 (3cm) of 0. If not, you should run the check calibration function, or recalibrate if needed. 
 
 ## Commanding Motor Controllers Directly
-The motor controllers are still available to command directly, but there are some things to be aware of.
+The motor controllers are still available to command directly, but this is not recommended and there are some things to be aware of.
 ### Read the motor joint states
 On the topic `/motor_head_joint_state_broadcaster/joint_states`. **Note: on this topic the joint states are not broadcast in order, you need to refer to the 'names' field of the message to match them. This is the only place where this is the case, all other joint and tendon broadcast or command topics are in order 0-8.**
 ### Command motor positions
@@ -48,12 +48,12 @@ On the topic `/motor_head_joint_position_controller/commands`. Units are mA and 
 The right controller needs to be active to command it (best to use the switch controller services on `/tendon_transmission_node/` to avoid activating them both at the same time).
 
 # Controlling the robot through Foxglove
-After launching the system on the Pi, go to `<IP_of_Pi>:8080` in a browser on your device. Choose 'Open Connection' and use `ws://<IP_of_Pi>:8765`. A 3D visualisation should be visible in the foxglove interface, and all available topics listed on the left. You can access all of the functionality discussed above using the following:
-- All available topics are visible in the panel on the left
-- The unlabelled panel with a small +/- icon in its top left corner will display the messages received on the topic name entered in the bar at the top of the panel
-- The panel labelled Publish will allow you to send messages to a topic, which can be chosen by clicking the cog icon in its top right corner (you may also need to set the correct message type here)
-- Adding a 'Service Request' panel will allow you to call the service chosen in the settings panel. The request content can be filled in the blank input field (note most of the services mentioned above are of the type `std_srvs/Trigger.srv` which do not take any request content)
+After launching the system on the Pi, go to `<IP_of_Pi>:8080` in a browser on your device. Choose 'Open Connection' and use `ws://<IP_of_Pi>:8765`. A visualisation should be visible in the 3D panel of the interface, and you can access all of the functionality discussed above using the following:
+- All available topics can be viewed under the Topics tab in the panel on the left
+- The Raw Messages panel (with a small +/- file icon in the top left corner) will display the messages received on the topic name entered in the bar at the top of the panel
+- The Publish panel will allow you to send messages to a topic, which can be chosen by clicking the settings cog icon in its top right corner (you may also need to set the correct message schema here)
+- The Service Call panel will allow you to call the service chosen in the settings. There is a Request input box to fill the content of the request, if needed
 See the Foxglove documentation for other functionality.
 
 # Controlling the robot through `roslibpy`
-TBC
+`roslibpy` can be used to access ROS topics, publish messages and make service calls through Python scripts. See [this full step by step demo notebook](https://github.com/helix-robotics-ag/main/blob/main/demos/roslibpy_demo.ipynb), which covers how to use all of these functions, and provides examples of basic Helix control.
