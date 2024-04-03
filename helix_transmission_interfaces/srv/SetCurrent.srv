@@ -1,0 +1,4 @@
+float64 current 0.0
+---
+bool success
+string message
