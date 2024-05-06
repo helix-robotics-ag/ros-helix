@@ -19,12 +19,12 @@
 
 <!-- First segment -->
 
-<joint name="seg1_mid_joint_a" type="floating">
+<joint name="seg1_mid_joint_1" type="floating">
   <parent link="arm_base"/>
-  <child link="seg1_mid_link_a"/>
+  <child link="seg1_mid_link_1"/>
 </joint>
 
-<link name="seg1_mid_link_a">
+<link name="seg1_mid_link_1">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -34,12 +34,12 @@
   </visual>
 </link>
 
-<joint name="seg1_mid_joint_b" type="floating">
+<joint name="seg1_mid_joint_2" type="floating">
   <parent link="arm_base"/>
-  <child link="seg1_mid_link_b"/>
+  <child link="seg1_mid_link_2"/>
 </joint>
 
-<link name="seg1_mid_link_b">
+<link name="seg1_mid_link_2">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -49,12 +49,12 @@
   </visual>
 </link>
 
-<joint name="seg1_mid_joint_c" type="floating">
+<joint name="seg1_mid_joint_3" type="floating">
   <parent link="arm_base"/>
-  <child link="seg1_mid_link_c"/>
+  <child link="seg1_mid_link_3"/>
 </joint>
 
-<link name="seg1_mid_link_c">
+<link name="seg1_mid_link_3">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -81,12 +81,12 @@
 
 <!-- Second segment -->
 
-<joint name="seg2_mid_joint_a" type="floating">
+<joint name="seg2_mid_joint_1" type="floating">
   <parent link="arm_base"/>
-  <child link="seg2_mid_link_a"/>
+  <child link="seg2_mid_link_1"/>
 </joint>
 
-<link name="seg2_mid_link_a">
+<link name="seg2_mid_link_1">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -96,12 +96,12 @@
   </visual>
 </link>
 
-<joint name="seg2_mid_joint_b" type="floating">
+<joint name="seg2_mid_joint_2" type="floating">
   <parent link="arm_base"/>
-  <child link="seg2_mid_link_b"/>
+  <child link="seg2_mid_link_2"/>
 </joint>
 
-<link name="seg2_mid_link_b">
+<link name="seg2_mid_link_2">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -111,12 +111,12 @@
   </visual>
 </link>
 
-<joint name="seg2_mid_joint_c" type="floating">
+<joint name="seg2_mid_joint_3" type="floating">
   <parent link="arm_base"/>
-  <child link="seg2_mid_link_c"/>
+  <child link="seg2_mid_link_3"/>
 </joint>
 
-<link name="seg2_mid_link_c">
+<link name="seg2_mid_link_3">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -126,12 +126,12 @@
   </visual>
 </link>
 
-<joint name="seg2_mid_joint_d" type="floating">
+<joint name="seg2_mid_joint_4" type="floating">
   <parent link="arm_base"/>
-  <child link="seg2_mid_link_d"/>
+  <child link="seg2_mid_link_4"/>
 </joint>
 
-<link name="seg2_mid_link_d">
+<link name="seg2_mid_link_4">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -141,12 +141,12 @@
   </visual>
 </link>
 
-<joint name="seg2_mid_joint_e" type="floating">
+<joint name="seg2_mid_joint_5" type="floating">
   <parent link="arm_base"/>
-  <child link="seg2_mid_link_e"/>
+  <child link="seg2_mid_link_5"/>
 </joint>
 
-<link name="seg2_mid_link_e">
+<link name="seg2_mid_link_5">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -156,12 +156,12 @@
   </visual>
 </link>
 
-<joint name="seg2_mid_joint_f" type="floating">
+<joint name="seg2_mid_joint_6" type="floating">
   <parent link="arm_base"/>
-  <child link="seg2_mid_link_f"/>
+  <child link="seg2_mid_link_6"/>
 </joint>
 
-<link name="seg2_mid_link_f">
+<link name="seg2_mid_link_6">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -171,12 +171,12 @@
   </visual>
 </link>
 
-<joint name="seg2_mid_joint_g" type="floating">
+<joint name="seg2_mid_joint_7" type="floating">
   <parent link="arm_base"/>
-  <child link="seg2_mid_link_g"/>
+  <child link="seg2_mid_link_7"/>
 </joint>
 
-<link name="seg2_mid_link_g">
+<link name="seg2_mid_link_7">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -203,12 +203,12 @@
 
 <!-- Third segment -->
 
-<joint name="seg3_mid_joint_a" type="floating">
+<joint name="seg3_mid_joint_1" type="floating">
   <parent link="arm_base"/>
-  <child link="seg3_mid_link_a"/>
+  <child link="seg3_mid_link_1"/>
 </joint>
 
-<link name="seg3_mid_link_a">
+<link name="seg3_mid_link_1">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -218,12 +218,12 @@
   </visual>
 </link>
 
-<joint name="seg3_mid_joint_b" type="floating">
+<joint name="seg3_mid_joint_2" type="floating">
   <parent link="arm_base"/>
-  <child link="seg3_mid_link_b"/>
+  <child link="seg3_mid_link_2"/>
 </joint>
 
-<link name="seg3_mid_link_b">
+<link name="seg3_mid_link_2">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -233,12 +233,12 @@
   </visual>
 </link>
 
-<joint name="seg3_mid_joint_c" type="floating">
+<joint name="seg3_mid_joint_3" type="floating">
   <parent link="arm_base"/>
-  <child link="seg3_mid_link_c"/>
+  <child link="seg3_mid_link_3"/>
 </joint>
 
-<link name="seg3_mid_link_c">
+<link name="seg3_mid_link_3">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -248,12 +248,12 @@
   </visual>
 </link>
 
-<joint name="seg3_mid_joint_d" type="floating">
+<joint name="seg3_mid_joint_4" type="floating">
   <parent link="arm_base"/>
-  <child link="seg3_mid_link_d"/>
+  <child link="seg3_mid_link_4"/>
 </joint>
 
-<link name="seg3_mid_link_d">
+<link name="seg3_mid_link_4">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -263,12 +263,12 @@
   </visual>
 </link>
 
-<joint name="seg3_mid_joint_e" type="floating">
+<joint name="seg3_mid_joint_5" type="floating">
   <parent link="arm_base"/>
-  <child link="seg3_mid_link_e"/>
+  <child link="seg3_mid_link_5"/>
 </joint>
 
-<link name="seg3_mid_link_e">
+<link name="seg3_mid_link_5">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -278,12 +278,12 @@
   </visual>
 </link>
 
-<joint name="seg3_mid_joint_f" type="floating">
+<joint name="seg3_mid_joint_6" type="floating">
   <parent link="arm_base"/>
-  <child link="seg3_mid_link_f"/>
+  <child link="seg3_mid_link_6"/>
 </joint>
 
-<link name="seg3_mid_link_f">
+<link name="seg3_mid_link_6">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -293,12 +293,12 @@
   </visual>
 </link>
 
-<joint name="seg3_mid_joint_g" type="floating">
+<joint name="seg3_mid_joint_7" type="floating">
   <parent link="arm_base"/>
-  <child link="seg3_mid_link_g"/>
+  <child link="seg3_mid_link_7"/>
 </joint>
 
-<link name="seg3_mid_link_g">
+<link name="seg3_mid_link_7">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
