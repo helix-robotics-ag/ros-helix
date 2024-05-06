@@ -5,141 +5,322 @@
 
 <xacro:arg name="mesh_url" default="package://helix_description" />
 
-<xacro:include filename="$(find helix_description)/urdf/helix_arm.materials.xacro" />
-
-<!-- Example below for a rigid serial chain. Maybe not relevant at all for flexible Helix arm representation. -->
-
-<link name="Index_Base_1">
-  <inertial>
-    <origin xyz="-0.007201714291713072 0.005885230272430774 0.0016787722912366132" rpy="0 0 0"/>
-    <mass value="0.01722650129403022"/>
-    <inertia ixx="1e-06" iyy="1e-06" izz="1e-06" ixy="0.0" iyz="0.0" ixz="-0.0"/>
-  </inertial>
+<link name="arm_base">
   <visual>
-    <origin xyz="0.027097 -0.003767 -0.0915" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="$(arg mesh_url)/meshes/Index_Base_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="finger_base"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="white"/>
   </visual>
-  <collision>
-    <origin xyz="0.027097 -0.003767 -0.0915" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="$(arg mesh_url)/meshes/Index_Base_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
 </link>
 
-<link name="Index_2dof_joint_1">
-  <inertial>
-    <origin xyz="-0.001481711245915833 -0.0034266921818958945 0.0028828067230253634" rpy="0 0 0"/>
-    <mass value="0.0074922865960129585"/>
-    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.034116 -0.013147 -0.1031" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="$(arg mesh_url)/meshes/Index_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="2dof_joint"/>
-  </visual>
-  <collision>
-    <origin xyz="0.034116 -0.013147 -0.1031" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="$(arg mesh_url)/meshes/Index_2dof_joint_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+<!-- Links for visualisation using floating discs, their transforms can be set manually -->
 
-<link name="Index_Proximal_1">
-  <inertial>
-    <origin xyz="0.0006445383282672051 0.001274183043787739 0.021749999999999825" rpy="0 0 0"/>
-    <mass value="0.039861235764857395"/>
-    <inertia ixx="5e-06" iyy="6e-06" izz="1e-06" ixy="0.0" iyz="-0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.034299 -0.009652 -0.1121" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="$(arg mesh_url)/meshes/Index_Proximal_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="proximal"/>
-  </visual>
-  <collision>
-    <origin xyz="0.034299 -0.009652 -0.1121" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="$(arg mesh_url)/meshes/Index_Proximal_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
+<!-- First segment -->
 
-<link name="Index_Middle_1">
-  <inertial>
-    <origin xyz="-0.000786432090189769 0.0012174084476994501 0.015999999999999903" rpy="0 0 0"/>
-    <mass value="0.02706545369444013"/>
-    <inertia ixx="2e-06" iyy="2e-06" izz="1e-06" ixy="-0.0" iyz="0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.034299 -0.009652 -0.1556" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="$(arg mesh_url)/meshes/Index_Middle_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="middle"/>
-  </visual>
-  <collision>
-    <origin xyz="0.034299 -0.009652 -0.1556" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="$(arg mesh_url)/meshes/Index_Middle_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="Index_Distal_1">
-  <inertial>
-    <origin xyz="0.0006324531075937584 0.0009652221564475042 0.012319161138346219" rpy="0 0 0"/>
-    <mass value="0.019789884505209417"/>
-    <inertia ixx="1e-06" iyy="1e-06" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.034299 -0.009652 -0.1876" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="$(arg mesh_url)/meshes/Index_Distal_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="distal"/>
-  </visual>
-  <collision>
-    <origin xyz="0.034299 -0.009652 -0.1876" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="$(arg mesh_url)/meshes/Index_Distal_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<joint name="Index_MCP_Orth" type="continuous">
-  <origin xyz="-0.007019 0.00938 0.0116" rpy="0 0 0"/>
-  <parent link="Index_Base_1"/>
-  <child link="Index_2dof_joint_1"/>
-  <axis xyz="0.052336 0.99863 0.0"/>
+<joint name="seg1_mid_joint_a" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg1_mid_link_a"/>
 </joint>
 
-<joint name="Index_MCP" type="continuous">
-  <origin xyz="-0.000183 -0.003495 0.009" rpy="0 0 0"/>
-  <parent link="Index_2dof_joint_1"/>
-  <child link="Index_Proximal_1"/>
-  <axis xyz="-0.99863 0.052336 -0.0"/>
+<link name="seg1_mid_link_a">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg1_mid_joint_b" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg1_mid_link_b"/>
 </joint>
 
-<joint name="Index_PIP" type="continuous">
-  <origin xyz="0.0 0.0 0.0435" rpy="0 0 0"/>
-  <parent link="Index_Proximal_1"/>
-  <child link="Index_Middle_1"/>
-  <axis xyz="-0.99863 0.052336 0.0"/>
+<link name="seg1_mid_link_b">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg1_mid_joint_c" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg1_mid_link_c"/>
 </joint>
 
-<joint name="Index_DIP" type="continuous">
-  <origin xyz="0.0 0.0 0.032" rpy="0 0 0"/>
-  <parent link="Index_Middle_1"/>
-  <child link="Index_Distal_1"/>
-  <axis xyz="-0.99863 0.052336 0.0"/>
+<link name="seg1_mid_link_c">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg1_end_joint" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg1_end_link"/>
 </joint>
+
+<link name="seg1_end_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="white"/>
+  </visual>
+</link>
+
+<!-- Second segment -->
+
+<joint name="seg2_mid_joint_a" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg2_mid_link_a"/>
+</joint>
+
+<link name="seg2_mid_link_a">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg2_mid_joint_b" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg2_mid_link_b"/>
+</joint>
+
+<link name="seg2_mid_link_b">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg2_mid_joint_c" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg2_mid_link_c"/>
+</joint>
+
+<link name="seg2_mid_link_c">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg2_mid_joint_d" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg2_mid_link_d"/>
+</joint>
+
+<link name="seg2_mid_link_d">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg2_mid_joint_e" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg2_mid_link_e"/>
+</joint>
+
+<link name="seg2_mid_link_e">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg2_mid_joint_f" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg2_mid_link_f"/>
+</joint>
+
+<link name="seg2_mid_link_f">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg2_mid_joint_g" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg2_mid_link_g"/>
+</joint>
+
+<link name="seg2_mid_link_g">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg2_end_joint" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg2_end_link"/>
+</joint>
+
+<link name="seg2_end_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="white"/>
+  </visual>
+</link>
+
+<!-- Third segment -->
+
+<joint name="seg3_mid_joint_a" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg3_mid_link_a"/>
+</joint>
+
+<link name="seg3_mid_link_a">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg3_mid_joint_b" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg3_mid_link_b"/>
+</joint>
+
+<link name="seg3_mid_link_b">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg3_mid_joint_c" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg3_mid_link_c"/>
+</joint>
+
+<link name="seg3_mid_link_c">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg3_mid_joint_d" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg3_mid_link_d"/>
+</joint>
+
+<link name="seg3_mid_link_d">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg3_mid_joint_e" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg3_mid_link_e"/>
+</joint>
+
+<link name="seg3_mid_link_e">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg3_mid_joint_f" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg3_mid_link_f"/>
+</joint>
+
+<link name="seg3_mid_link_f">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg3_mid_joint_g" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg3_mid_link_g"/>
+</joint>
+
+<link name="seg3_mid_link_g">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="clear"/>
+  </visual>
+</link>
+
+<joint name="seg3_end_joint" type="floating">
+  <parent link="arm_base"/>
+  <child link="seg3_end_link"/>
+</joint>
+
+<link name="seg3_end_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.005" radius="0.03"/>
+      </geometry>
+    <material name="white"/>
+  </visual>
+</link>
 
 </robot>
