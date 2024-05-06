@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-joint-state-publisher \
     ros-${ROS_DISTRO}-xacro \
     ros-${ROS_DISTRO}-ros2-controllers \
+    ros-${ROS_DISTRO}-spacenav \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ros_entrypoint.sh .

@@ -16,4 +16,6 @@ services:
       - ROS_DOMAIN_ID
     volumes:
       - ~/.config/helix:/tmp/config
+    devices:
+      - /dev/input/js0
     command: su - ros --whitelist-environment=ROS_DOMAIN_ID /run.sh
