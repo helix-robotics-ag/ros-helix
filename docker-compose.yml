@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   ros-helix:
     image: ghcr.io/helix-robotics-ag/ros-helix:iron
