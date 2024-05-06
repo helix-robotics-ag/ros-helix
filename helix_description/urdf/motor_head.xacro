@@ -5,8 +5,6 @@
 
 <xacro:arg name="mesh_url" default="package://helix_description" />
 
-<xacro:include filename="$(find helix_description)/urdf/motor_head.materials.xacro" />
-
 <xacro:macro name="motor_head" params="parent *origin">
 
   <joint name="origin_to_base" type="fixed">

@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <robot name="helix_description" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find helix_description)/urdf/helix.materials.xacro" />
   
   <xacro:include filename="$(find helix_description)/urdf/motor_head.xacro" />
   <xacro:include filename="$(find helix_description)/urdf/helix.ros2_control.xacro" />
-  <!-- <xacro:include filename="$(find helix_description)/urdf/helix_arm.xacro"  /> -->
+  <xacro:include filename="$(find helix_description)/urdf/helix_arm.xacro"  />
 
   <link name="origin"/>
 
