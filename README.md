@@ -8,7 +8,7 @@ From the terminal of the Helix Raspberry Pi (assuming the Pi has previously been
 - `$ git pull` Check that the branch is up to date
 - `$ git submodule update --init --recursive` Make sure all submodules are checked out correctly as well
 - `$ docker compose pull` Make sure the most updated images are pulled
-- `$ docker compose run` Start all the containers
+- `$ docker compose up` Start all the containers
 
 Among the output, you should see the below messages, indicating that the system launched correctly:
 ```
