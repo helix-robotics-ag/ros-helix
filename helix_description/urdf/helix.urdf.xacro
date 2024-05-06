@@ -3,7 +3,7 @@
   
   <xacro:include filename="$(find helix_description)/urdf/motor_head.xacro" />
   <xacro:include filename="$(find helix_description)/urdf/helix.ros2_control.xacro" />
-  <xacro:include filename="$(find helix_description)/urdf/helix_arm.xacro"  />
+  <!-- <xacro:include filename="$(find helix_description)/urdf/helix_arm.xacro"  /> -->
 
   <link name="origin"/>
 
