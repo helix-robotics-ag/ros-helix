@@ -86,6 +86,13 @@ def generate_launch_description():
         output="screen",
     )
 
+    spacenav_node = Node(
+        package="spacenav",
+        executable="spacenav_node",
+        name="spacenav_node",
+        output="screen",
+    )
+    
     # ros2_control 'controller' (broadcaster) for gripper joint state
     gripper_joint_state_broadcaster_node = Node(
         package="controller_manager",
@@ -117,6 +124,7 @@ def generate_launch_description():
     ld.add_action(motor_head_joint_position_controller_node)
     ld.add_action(motor_head_joint_effort_controller_node)
     ld.add_action(tendon_transmission_node)
+    ld.add_action(spacenav_node)  
     ld.add_action(gripper_joint_state_broadcaster_node)
     ld.add_action(gripper_joint_position_controller_node)
     ld.add_action(gripper_joint_effort_controller_node)
