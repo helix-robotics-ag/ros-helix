@@ -35,7 +35,7 @@ def generate_launch_description():
         executable='joint_state_publisher',
         name='joint_state_publisher',
         parameters=[{
-            'source_list': ['motor_head_joint_state_broadcaster/joint_states','gripper_joint_state_broadcaster/joint_states'], 
+            'source_list': ['motor_head_joint_state_broadcaster/joint_states'], 
         }]
     )
 
@@ -92,30 +92,6 @@ def generate_launch_description():
         name="spacenav_node",
         output="screen",
     )
-    
-    # ros2_control 'controller' (broadcaster) for gripper joint state
-    gripper_joint_state_broadcaster_node = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["gripper_joint_state_broadcaster", "--controller-manager", "/controller_manager"],
-        output="screen",
-    )
-
-    # ros2_control controller for gripper joint position
-    gripper_joint_position_controller_node = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["gripper_joint_position_controller", "--inactive", "-c", "/controller_manager"],
-        output="screen",
-    )
-    
-    # ros2_control controller for gripper joint effort
-    gripper_joint_effort_controller_node = Node(
-            package="controller_manager",
-            executable="spawner",
-            arguments=["gripper_joint_effort_controller", "-c", "/controller_manager"],
-            output="screen",
-    )
 
     ld.add_action(robot_state_publisher)
     ld.add_action(joint_state_publisher_node)
@@ -124,9 +100,6 @@ def generate_launch_description():
     ld.add_action(motor_head_joint_position_controller_node)
     ld.add_action(motor_head_joint_effort_controller_node)
     ld.add_action(tendon_transmission_node)
-    ld.add_action(spacenav_node)  
-    ld.add_action(gripper_joint_state_broadcaster_node)
-    ld.add_action(gripper_joint_position_controller_node)
-    ld.add_action(gripper_joint_effort_controller_node)
+    ld.add_action(spacenav_node)
 
     return ld
