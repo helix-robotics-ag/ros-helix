@@ -5,8 +5,6 @@
 
 <xacro:arg name="mesh_url" default="package://helix_description" />
 
-<xacro:include filename="$(find helix_description)/urdf/motor_head.materials.xacro" />
-
 <xacro:macro name="motor_head" params="parent *origin">
 
   <joint name="origin_to_base" type="fixed">
@@ -204,6 +202,25 @@
 
    <!-- Link 8 -->
   <link name="link8">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder length="0.015" radius="0.02"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <!-- Gripper Joint -->
+  <joint name="joint_gripper" type="continuous">
+    <parent link="base"/>
+    <child link="link_gripper"/>
+    <origin xyz="0 0 0.2" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+   <!-- Gripper Link -->
+  <link name="link_gripper">
     <visual>
       <origin xyz="0 0 0" rpy="0 1.57 0"/>
       <geometry>
