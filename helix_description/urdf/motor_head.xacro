@@ -211,6 +211,25 @@
     </visual>
   </link>
 
+  <!-- Gripper Joint -->
+  <joint name="joint_gripper" type="continuous">
+    <parent link="base"/>
+    <child link="link_gripper"/>
+    <origin xyz="0 0 0.2" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+   <!-- Gripper Link -->
+  <link name="link_gripper">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder length="0.015" radius="0.02"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
 </xacro:macro>
 
 </robot>
