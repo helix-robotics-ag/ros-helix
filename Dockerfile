@@ -24,6 +24,7 @@ COPY ros_entrypoint.sh .
 WORKDIR /colcon_ws
 COPY helix_bringup src/helix_bringup
 COPY helix_description src/helix_description
+COPY helix_gripper src/helix_gripper
 COPY helix_transmission src/helix_transmission
 COPY helix_transmission_interfaces src/helix_transmission_interfaces
 COPY dynamixel_hardware src/dynamixel_hardware

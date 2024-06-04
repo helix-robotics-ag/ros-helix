@@ -79,6 +79,13 @@ def generate_launch_description():
             output="screen",
     )
 
+    tendon_transmission_node = Node(
+        package="helix_transmission",
+        executable="tendon_transmission_node",
+        name="tendon_transmission_node",
+        output="screen",
+    )
+
     # ros2_control 'controller' (broadcaster) for gripper joint state
     gripper_joint_state_broadcaster_node = Node(
         package="controller_manager",
@@ -95,10 +102,10 @@ def generate_launch_description():
         output="screen",
     )
 
-    tendon_transmission_node = Node(
-        package="helix_transmission",
-        executable="tendon_transmission_node",
-        name="tendon_transmission_node",
+    helix_gripper_node = Node(
+        package="helix_gripper",
+        executable="helix_gripper_node",
+        name="helix_gripper_node",
         output="screen",
     )
 
@@ -115,9 +122,10 @@ def generate_launch_description():
     ld.add_action(motor_head_joint_state_broadcaster_node)
     ld.add_action(motor_head_joint_position_controller_node)
     ld.add_action(motor_head_joint_effort_controller_node)
+    ld.add_action(tendon_transmission_node)
     ld.add_action(gripper_joint_state_broadcaster_node)
     ld.add_action(gripper_joint_position_controller_node)
-    ld.add_action(tendon_transmission_node)
+    ld.add_action(helix_gripper_node)
     ld.add_action(spacenav_node)
 
     return ld
