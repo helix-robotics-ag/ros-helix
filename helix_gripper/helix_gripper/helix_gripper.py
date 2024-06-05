@@ -1,7 +1,6 @@
 import rclpy
 from rclpy.node import Node
 import numpy as np
-import yaml
 
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64, Float64MultiArray
@@ -12,17 +11,9 @@ class HelixGripperNode(Node):
     def __init__(self):
         super().__init__('helix_gripper_node')
 
-        # Load saved robot configuration from host (only pulley radius for gripper)
-        self.path_to_config = '/tmp/config/helix_transmission.config.yml'
-        try:
-            with open(self.path_to_config, 'r') as file:
-                config = yaml.safe_load(file)
-                self.PULLEY_RADIUS = config['pulley_radius']
-        except (FileNotFoundError):
-            self.get_logger().info('No configuration file found, commanding in radians')
-            self.PULLEY_RADIUS = 1.0  # [m]
+        self.PULLEY_RADIUS = 0.05  # [m]
         self.MOTOR_ORIENT = 1.0
-        self.INCREMENT_LIM = 0.5 * self.PULLEY_RADIUS # [m]
+        self.INCREMENT_LIM = self.PULLEY_RADIUS # [m]
 
         self.last_gripper_joint_position = None
 
