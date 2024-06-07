@@ -42,6 +42,11 @@ To calibrate the nominal straightened zero configuration, follow this procedure:
 ## Checking the zero state
 The motors' absolute positions may be lost after shutting down. To check that they are still correct, follow the above steps up to and including (4), then call `/tendon_transmission_node/check_calibration`. This will check whether the motor positions are within half a turn of the calibration, and offset the calibration file with additional revolutions if not. **This should be done whenever the motor controller is turned off and on, to avoid accidentally overtensioning the arm.** Note that if in doubt, the state of the tendon lengths with the nominal tension current applied should all be within about 0.03 (3cm) of 0. If not, you should run the check calibration function, or recalibrate if needed. 
 
+## Gripper motor controller
+The gripper motor is assigned Dyanmixel ID #9. A separate controller is available for this motor, by publishing to `/helix_gripper_node/command_increment` the tendon length can be incrementally changed. The message to publish is of type `Float64` corresponding to a tendon length change in metres, and the value is currently limited to +/-0.005m to avoid overtightening (however if you publish the message in a 100Hz loop you will command 0.5m of tendon length change in 1 second). 
+
+The system needs to be in position control mode (ie using `/tendon_transmission_node/switch_to_position_control`) for the gripper control to work (it is not currently possible to operate the motors in different control modes simultaneously). However it is possible to read the gripper motor current at `/gripper_joint_state_broadcaster/joint_states`, which could be useful to monitor gripping force.
+
 ## Commanding Motor Controllers Directly
 The motor controllers are still available to command directly, but this is not recommended and there are some things to be aware of.
 ### Read the motor joint states
@@ -49,7 +54,7 @@ On the topic `/motor_head_joint_state_broadcaster/joint_states`. **Note: on this
 ### Command motor positions
 On the topic `/motor_head_joint_position_controller/commands`. Units are radians and you need to take into account the orientation of the motors (increasing turns anticlockwise).
 ### Command motor currents
-On the topic `/motor_head_joint_position_controller/commands`. Units are mA and you need to take into account the orientation of the motors (positive turns anticlockwise).
+On the topic `/motor_head_joint_current_controller/commands`. Units are mA and you need to take into account the orientation of the motors (positive turns anticlockwise).
 
 The right controller needs to be active to command it (best to use the switch controller services on `/tendon_transmission_node/` to avoid activating them both at the same time).
 
