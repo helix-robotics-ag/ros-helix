@@ -11,7 +11,7 @@ class HelixGripperNode(Node):
     def __init__(self):
         super().__init__('helix_gripper_node')
 
-        self.PULLEY_RADIUS = 0.05  # [m]
+        self.PULLEY_RADIUS = 0.005  # [m]
         self.MOTOR_ORIENT = 1.0
         self.INCREMENT_LIM = self.PULLEY_RADIUS # [m]
 
