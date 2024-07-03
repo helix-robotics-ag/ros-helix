@@ -11,7 +11,9 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/SetCurrent.srv"
-  "srv/GoToGripperPose.srv"
+  "srv/GoToGripperPoseVector.srv"
+  "srv/GoToGripperPoseQuat.srv"
+  "srv/GoToGripperPoseEuler.srv"
   DEPENDENCIES geometry_msgs
 )
 
