@@ -42,7 +42,25 @@ To calibrate the nominal straightened zero configuration, follow this procedure:
 ## Checking the zero state
 The motors' absolute positions may be lost after shutting down. To check that they are still correct, follow the above steps up to and including (4), then call `/tendon_transmission_node/check_calibration`. This will check whether the motor positions are within half a turn of the calibration, and offset the calibration file with additional revolutions if not. **This should be done whenever the motor controller is turned off and on, to avoid accidentally overtensioning the arm.** Note that if in doubt, the state of the tendon lengths with the nominal tension current applied should all be within about 0.03 (3cm) of 0. If not, you should run the check calibration function, or recalibrate if needed. 
 
-## Gripper motor controller
+## Cartesian Control
+Model based control of the end effector in Cartesian space is implemented in the [`ros-helix-proprietary` repo](https://github.com/helix-robotics-ag/ros-helix-proprietary). 
+
+### End effector specification
+The "gripper pose" is used as an end effector goal, which is specified by two points in Cartesian space: the 'wrist' point in the centre of the end of the 3rd section of the robot arm, and the gripper TCP which is located some distance along the Z-direction of that frame. Those two points are the positions of the `seg3_end_link` and `helix_tcp` frames respectively. Together this provides a specification for the position of the `helix_tcp` frame and the direction that the frame's Z-axis points in. The orientation of the `helix_tcp` frame around it's Z-axis remains unconstrained, so it is worth noting that the 'gripper_pose' is actually a 5DOF specification, not a full 6DOF pose.
+
+### Model initialisation
+When the system starts up, it initialises a model of the robot kinematics. Note that there is currently no feedback between the motor/tendon positions and the model, so it is important that the calibrated 'zero' state of the robot matches the model for it to work. The initial state of the model is with the arm sections straight, and with lengths of 0.105m, 0.255m, and 0.240m respectively (TBC - conigurable initial model state), which should correspond with the physical state of the robot when `/tendon_transmission_node/tendon_states` are all 0. The best way to acheive this is to first do the above current control based calibration, then in position control measure and adjust the tendons directly until they all match the correct section lengths, then call `/tendon_transmission_node/set_motor_offsets` again.
+
+### Incremental control
+The `/helix_cartesian_control_node/delta_increment` topic provides a way to adjust the gripper pose incrementally. When a `TwistStamped` message is received, the gripper pose will be changed by its linear (m) and angular (rad) increment (relative to the provided `frame_id`, or the `origin` frame if this is not specfied). This is intended for small delta changes, although the scale is not checked or limited, so be careful.
+
+### Joystick control
+The '/spacenav/twist' input is forwarded to `/helix_cartesian_control_node/delta_increment` (at a certain rate and gain), allowing direct teleoperation of the gripper pose. This can be turned on and off by calling the `/helix_cartesian_control_node/activate_joystick_control` (or `deactivate_`...) services.
+
+### Pose to Pose control
+
+
+## Gripper Motor Controller
 The gripper motor is assigned Dyanmixel ID #9. A separate controller is available for this motor, by publishing to `/helix_gripper_node/command_increment` the tendon length can be incrementally changed. The message to publish is of type `Float64` corresponding to a tendon length change in metres, and the value is currently limited to +/-0.005m to avoid overtightening (however if you publish the message in a 100Hz loop you will command 0.5m of tendon length change in 1 second). 
 
 The system needs to be in position control mode (ie using `/tendon_transmission_node/switch_to_position_control`) for the gripper control to work (it is not currently possible to operate the motors in different control modes simultaneously). However it is possible to read the gripper motor current at `/gripper_joint_state_broadcaster/joint_states`, which could be useful to monitor gripping force.
