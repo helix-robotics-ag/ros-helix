@@ -5,7 +5,7 @@
 ### End effector goal specification
 Within the inverse kinematics a 'gripper pose' consisting of two points is used: the 'wrist' point at the end of the arm (position of `seg3_end_link` frame), and the gripper TCP which is located some distance along the Z-direction of that frame. Together these specify the position of the `helix_tcp` frame and the direction it points in, although it does not constrain the orientation around its Z-axis, which remains uncontrolled.
 
-![frames](https://github.com/helix-robotics-ag/ros-helix/assets/95340175/a180a4e7-71fb-45e4-9c2f-9d1f51fc334e)
+![frames](https://github.com/helix-robotics-ag/ros-helix/assets/95340175/1c209feb-aff2-4ade-80e0-1b00c6aebda7)
 
 ### Model initialisation
 When the system starts up, it initialises a model of the robot kinematics. Note that there is currently no feedback between the motor/tendon positions and the model, so it is important that the calibrated state of the robot matches the model. The initial state of the model is with the arm sections straight, and with lengths of 0.105m, 0.255m, and 0.240m respectively (TBC - conigurable initial model state), which should correspond with the physical state of the robot when `/tendon_transmission_node/tendon_states` are all 0. The best way to acheive this is to first do the current control based calibration, then in position control measure and adjust the tendons directly until they all match the correct section lengths, then call `/tendon_transmission_node/set_motor_offsets` again.
