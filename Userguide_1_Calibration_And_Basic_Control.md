@@ -1,25 +1,3 @@
-## Launching the embedded Helix ROS system
-From the terminal of the Helix Raspberry Pi (assuming the Pi has previously been set up correctly):
-- Navigate to the `main` repo directory
-- `$ git status` Check that the `main` branch (of the `main` repo) is checked out
-- `$ git pull` Check that the branch is up to date
-- `$ git submodule update --init --recursive` Make sure all submodules are checked out correctly as well
-- `$ docker compose pull` Make sure the most updated images are pulled
-- `$ docker compose up` Start all the containers
-
-Among the output, you should see the below messages, indicating that the system launched correctly:
-```
-Loaded motor_head_joint_position_controller (in blue)
-Configured and activated motor_head_joint_position_controller (in green)
-Loaded motor_head_joint_state_broadcaster (in blue)
-Configured and activated motor_head_joint_state_broadcaster (in green)
-Loaded motor_head_joint_effort_controller (in blue)
-```
-For further information, or troubleshooting in case launching fails, see the README in the [`main` repo](https://github.com/helix-robotics-ag/main/tree/main).
-
-## Connecting to the Helix ROS system
-Connect your device to the Helix RPi by Ethernet, configure network settings and ensure you are able to communicate with the Pi. If you can ping the Pi successfully, you should be able to see the Helix ROS system as well. Probably the easiest way to check if it is working is through Foxglove (see the external interfaces readme).
-
 ## Controlling the robot through the Tendon Transmission interface
 The `helix_transmission` package provides an interface for reading and commanding lengths of the nine tendons through topics and services under the `tendon_transmission_node` namespace.
 - `/tendon_transmission_node/joint_states` publishes a `JointState[9]` with the current tendon position and velocities (effort is currently unused).
@@ -33,7 +11,7 @@ To calibrate the nominal straightened zero configuration, follow this procedure:
 2. The zero state should be set with the nominal tensioning current applied from a roughly straight state. If needed, release the tension on the tendons beforehand by calling the service `/tendon_transmission_node/set_current` with the request `{"current": 3.0}`, causing the motors to slowly start to unwind
 3. Stop the motors by calling the same service with `{"current": 0.0}` (Note: setting zero current isn't equivalent to disabling motor torque - the motors will try to hold the current at 0, which will resist relaxing the tendons)
 4. From the roughly straight state, apply the nominal tension current by calling the same service again with `{"current": -70.0}`
-5. Now manipulate the robot into the desired zero state. Once there, save the calibration by calling the `/tendon_transmission_node/set_motor_offsets` service.
+5. Now manually put the robot into the desired zero state. Once there, save the calibration by calling the `/tendon_transmission_node/set_motor_offsets` service.
 6. You can now switch back to position control mode by calling `/tendon_transmission_node/switch_to_position_control`
 
 ## Checking the zero state
@@ -45,12 +23,12 @@ The gripper motor is assigned Dyanmixel ID #9. A separate controller is availabl
 The system needs to be in position control mode (ie using `/tendon_transmission_node/switch_to_position_control`) for the gripper control to work (it is not currently possible to operate the motors in different control modes simultaneously). However it is possible to read the gripper motor current at `/gripper_joint_state_broadcaster/joint_states`, which could be useful to monitor gripping force.
 
 ## Commanding Motor Controllers Directly
-The motor controllers are still available to command directly, but this is not recommended and there are some things to be aware of.
-### Read the motor joint states
-On the topic `/motor_head_joint_state_broadcaster/joint_states`. **Note: on this topic the joint states are not broadcast in order, you need to refer to the 'names' field of the message to match them. This is the only place where this is the case, all other joint and tendon broadcast or command topics are in order 0-8.**
-### Command motor positions
-On the topic `/motor_head_joint_position_controller/commands`. Units are radians and you need to take into account the orientation of the motors (increasing turns anticlockwise).
-### Command motor currents
-On the topic `/motor_head_joint_current_controller/commands`. Units are mA and you need to take into account the orientation of the motors (positive turns anticlockwise).
+The motor controllers are also available to command directly, but this is not recommended and there are some things to be aware of.
 
-The right controller needs to be active to command it (best to use the switch controller services on `/tendon_transmission_node/` to avoid activating them both at the same time).
+The motor joint states can be read on the topic `/motor_head_joint_state_broadcaster/joint_states`. **Note: on this topic the joint states are not broadcast in order, you need to refer to the 'names' field of the message to match them. This is the only place where this is the case, all other joint and tendon broadcast or command topics are in order 0-8.**
+
+The motor positions can be commanded on the topic `/motor_head_joint_position_controller/commands`. Units are radians and you need to take into account the orientation of the motors (increasing turns anticlockwise).
+
+The motor currents can be commanded on the topic `/motor_head_joint_current_controller/commands`. Units are mA and you need to take into account the orientation of the motors (positive turns anticlockwise).
+
+The right controller needs to be active to command it (by using the switch controller services on `/tendon_transmission_node/` to avoid activating them both at the same time).

@@ -30,11 +30,11 @@ When a `TwistStamped` message is received on the `/helix_cartesian_control_node/
 ### Pose to Pose control
 Three services can be called to move the end effector to a specified goal, which differ only in how the desired gripper direction is specified. 
 
-`/helix_cartesian_control_node/go_to_gripper_pose_vector` takes a `geometry_msgs/Point` for the TCP position and `geometry_msgs/Vector3` for the `helix_tcp` frame Z-axis direction vector in the request.
+`/helix_cartesian_control_node/go_to_gripper_pose_vector` takes a `geometry_msgs/Point` for the TCP position and a `geometry_msgs/Vector3` for the direction of the `helix_tcp` frame Z-axis in the request.
 ```
 {
-  "goal_point":{"x": <x>, "y": <y>, "z": <z>},
-  "goal_direction":{"x": <x>, "y": <y>, "z": <z>}
+  "goal_point" : {"x": <x>, "y": <y>, "z": <z>},
+  "goal_direction" : {"x": <x>, "y": <y>, "z": <z>}
 }
 ```
 `/helix_cartesian_control_node/go_to_gripper_pose_quat` takes a `geometry_msgs/Pose` for the `helix_tcp` frame in the request. Note that, as discussed above, only the direction of the Z-axis specified by the orientation quaternion is actually constrained.
@@ -42,27 +42,27 @@ Three services can be called to move the end effector to a specified goal, which
 {
   "goal_pose":
   {
-    "position":{"x": <x>, "y": <y>, "z": <z>},
-    "orientation":{"x": <x>, "y": <y>, "z": <z>, "w": <w>}
+    "position" : {"x": <x>, "y": <y>, "z": <z>},
+    "orientation" : {"x": <x>, "y": <y>, "z": <z>, "w": <w>}
   }
 }
 ```
-`/helix_cartesian_control_node/go_to_gripper_pose_euler` takes a `geometry_msgs/Point` for the TCP position, `float64[3]` set of Euler angles and `string` axes specification for the `helix_tcp` frame Z-axis direction vector in the request. Again only the direction of the Z-axis resulting from the Euler angle specification is actually constrained. The axes specification is a four letter string as described [here](https://matthew-brett.github.io/transforms3d/reference/transforms3d.euler.html#specifying-angle-conventions).
+`/helix_cartesian_control_node/go_to_gripper_pose_euler` takes a `geometry_msgs/Point` for the TCP position, `float64[3]` set of Euler angles and `string` axes specification for the `helix_tcp` frame orientation in the request. Again only the direction of the Z-axis of the resulting orientation is actually constrained. The axes specification is a four letter string as described [here](https://matthew-brett.github.io/transforms3d/reference/transforms3d.euler.html#specifying-angle-conventions).
 ```
 {
-  "goal_point":{"x": <x>, "y": <y>, "z": <z>},
-  "goal_euler_angs":[<r>,<p>,<y>],
-  "axes":"<axes_spec>"
+  "goal_point" : {"x": <x>, "y": <y>, "z": <z>},
+  "goal_euler_angs" : [<r>, <p>, <y>],
+  "axes" : "<axes_spec>"
 }
 ```
 In addition to the goal, these services have several other optional parameters:
-- `string frame_id`: indicating in which frame the goal is specified. Defaults to `origin` if not included.
-- `bool plan_linear`: when `true`, the service interpolate a series of points between the current state and goal, and calculates the IK for each point to create a more linear end effector trajectory. Defaults to `false`, where the trajectory will be planned over one step only.
-- `bool ik_uses_prev`: when `true`, the IK will use the previous end effector state as a starting point. This may be useful combined with the linear trajectory planning, since in theory from step to step the IK should converge more quickly, however it is also possible that the arm model ends up in an unnatural state where the IK gets stuck. Defaults to `false`, where the IK uses the initial calibrated arm state as the starting point each time, which in general converges more robustly.
+- `string frame_id`: indicating in which frame the goal is specified. Defaults to `origin` if not specified.
+- `bool plan_linear`: when `true`, the services will interpolate a series of poses between the current state and goal, and calculate the IK for each to create a more linear end effector trajectory. Defaults to `false`, where the trajectory will be planned over one step only.
+- `bool ik_uses_prev`: when `true`, the IK will use the previous end effector state as a starting point. This may be useful combined with the linear trajectory planning, since in theory from step to step the IK should converge more quickly, however it is also possible that the arm model ends up in an unnatural state where the IK gets stuck. Defaults to `false`, where the IK uses the initial calibrated arm state as the starting point each time, which generally converges more robustly.
 
 ### Trajectory Execution
 
-The services first calculate a trajectory to the goal, start the trajectory execution and then return their response immediately (not after the trajectory is completed, as this continues separately from the service call). It will return a `success=true` response even if it is unable to plan to the goal fully, and will execute a partial trajectory up to the closest point to the goal that the IK converged to. A `success=false` response will only be returned if the frame in which the goal was specified was invalid.
+The services first calculate a trajectory to the goal, start the trajectory execution and then return their response immediately (not after the trajectory is completed, as this continues separately from the service call). They will return a `success=true` response even if unable to plan to the goal fully, and will execute a partial trajectory up to the closest point to the goal that the IK converged to. A `success=false` response will only be returned if the frame in which the goal was specified was invalid.
 
 ### Cartesian Pose Service Call Examples
 
@@ -117,9 +117,9 @@ Using `/helix_cartesian_control_node/go_to_gripper_pose_euler`:
 ```
 ```
 {
-  "frame_id":"arm_base",
-  "goal_point":{"x": 0, "y": -0.25, "z": 0.4},
-  "goal_euler_angs":[0, 0, 1.57],
+  "frame_id":"origin",
+  "goal_point":{"x": 0, "y": 0.25, "z": -0.4},
+  "goal_euler_angs":[0, 0, -1.57],
   "axes":"szyx"
 }
 ```

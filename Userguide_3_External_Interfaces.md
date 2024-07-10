@@ -1,6 +1,3 @@
-# Controlling the robot from an external device
-Note: Most of the instructions below will be described for control from an external device running native ROS. As Foxglove and `roslibpy` provide ways for other devices that aren't running ROS to interact with the system from a browser or Python script respectively, the same instructions can be followed for those interfaces - the details for how this can be done are included later in the README. Please read the full set of instructions before using the system from any interface.
-
 # Controlling the robot through Foxglove
 After launching the system on the Pi, go to `<IP_of_Pi>:8080` in a browser on your device. Choose 'Open Connection' and use `ws://<IP_of_Pi>:8765`. You should find and interface as below:
 
@@ -12,7 +9,7 @@ The elements of the interface are:
 - C: A plot showing each of the tendon state positions
 - D: A table with all information from the `/tendon_states` topic. (This seems to be the best way to display all this information, despite the `name` field taking up a lot of space. If the fields under `position` etc just say `Object`, click to expand them)
 - E: This panel will allow you to call the service chosen in the settings. Fill the Request field if needed.
-- F: This panel will allow you to publish messages to a topic, which can be chosen in its settings (you may also need to set the correct message schema here)
+- F: This panel will allow you to publish messages to a topic, which can be chosen in its settings (you may also need to set the correct message schema there)
 - G: This panel will display the messages received on the topic name entered in the bar at the top of the panel, though the actual data can be hard to read
 - H: Teleop panel (currently unused)
 
