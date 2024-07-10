@@ -13,7 +13,7 @@ Among the output, you should see some messages in green and blue saying 'Loaded.
 Connect your device to the Helix RPi, configure network settings and ensure you are able to communicate with the Pi. If you can ping the Pi successfully, you should be able to see the Helix ROS system as well. Probably the easiest way to quickly check if it is working is through Foxglove (see the external interfaces readme).
 
 ## Further information
-See the other documentation for information about:
+See the other documentation in this repo for information about:
 1. Calibrating and controlling the tendon lengths, and the gripper
 2. Cartesian control of the end effector
 3. General information about using the system from the browser-based Foxglove interface or Python scripting using `roslibpy`
