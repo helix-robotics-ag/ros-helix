@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 import numpy as np
+import yaml
 
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64, Float64MultiArray
@@ -11,9 +12,28 @@ class HelixGripperNode(Node):
     def __init__(self):
         super().__init__('helix_gripper_node')
 
-        self.PULLEY_RADIUS = 0.005  # [m]
-        self.MOTOR_ORIENT = 1.0
-        self.INCREMENT_LIM = self.PULLEY_RADIUS # [m]
+         # Load saved robot configuration from host, or create default config
+        path_to_config = '/tmp/config/helix_gripper.config.yml'
+        try:
+            with open(path_to_config, 'r') as file:
+                config = yaml.safe_load(file)
+                self.PULLEY_RADIUS = config['pulley_radius']
+                self.MOTOR_ORIENT = config['motor_orient']
+                self.INCREMENT_LIM = config['increment_lim']
+        except (FileNotFoundError):
+            self.get_logger().info('No gripper configuration file found, setting defaults')
+            with open(path_to_config, 'w') as file:
+                self.PULLEY_RADIUS = 0.005  # [m]
+                self.MOTOR_ORIENT = 1.0 # 1 for motor orientations where anticlockwise pulls the tendon
+                self.INCREMENT_LIM = 0.005 # [m]
+                yaml.dump({
+                    'pulley_radius': self.PULLEY_RADIUS,
+                    'motor_orient': self.MOTOR_ORIENT,
+                    'increment_lim': self.INCREMENT_LIM,
+                    }, file)
+        except (yaml.YAMLError, TypeError):
+            self.get_logger().error('Unable to read or write configuration file for startup')
+            return
 
         self.last_gripper_joint_position = None
 
