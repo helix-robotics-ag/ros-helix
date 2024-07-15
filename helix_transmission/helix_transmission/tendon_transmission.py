@@ -34,8 +34,8 @@ class TendonTransmissionNode(Node):
             with open(self.path_to_config, 'w') as file:
                 self.PULLEY_RADIUS = 0.01  # [m]
                 self.MOTOR_ORIENTS = np.array([1, 1, 1, 1, 1, 1, -1, -1, -1], dtype=np.float64)  # 1 for motor orientations where anticlockwise pulls the tendon
-                self.TENDON_LIMITS = np.array([-0.2, 0.1], dtype=np.float64)  # [m]
-                self.CURRENT_LIMITS = np.array([-300.0, 10.0], dtype=np.float64)  # [mA] per section
+                self.TENDON_LIMITS = np.array([-0.1, 0.1], dtype=np.float64)  # [m] per  segment
+                self.CURRENT_LIMITS = np.array([-300.0, 10.0], dtype=np.float64)  # [mA] per segment
                 yaml.dump({
                     'pulley_radius': self.PULLEY_RADIUS,
                     'motor_orients': self.MOTOR_ORIENTS.tolist(),
@@ -127,7 +127,8 @@ class TendonTransmissionNode(Node):
     # Callbacks for motor<->tendon transmission
     def tendon_to_motor_command_cb(self, msg):
         command = np.array(msg.data, dtype=np.float64)
-        command_limited = np.clip(command, self.TENDON_LIMITS[0], self.TENDON_LIMITS[1])
+        command_limited = np.hstack([np.clip(command[:3], self.TENDON_LIMITS[0], self.TENDON_LIMITS[1]),
+                                     np.clip(command[3:], 2 * self.TENDON_LIMITS[0], self.TENDON_LIMITS[1])])
         if not np.array_equal(command, command_limited):
             self.get_logger().info('Some tendon commands exceeded limits and were clipped')
         motor_command = Float64MultiArray()
@@ -138,7 +139,7 @@ class TendonTransmissionNode(Node):
     def tendon_to_motor_current_command_cb(self, msg):
         command = np.array(msg.data, dtype=np.float64)
         command_limited = np.hstack([np.clip(command[:3], self.CURRENT_LIMITS[0], self.CURRENT_LIMITS[1]),
-                                    np.clip(command[3:], self.CURRENT_LIMITS[0] * 2, self.CURRENT_LIMITS[1])])
+                                     np.clip(command[3:], 2 * self.CURRENT_LIMITS[0], self.CURRENT_LIMITS[1])])
         if not np.array_equal(command, command_limited):
             self.get_logger().info('Some current commands exceeded limits and were clipped')
         motor_command = Float64MultiArray()
