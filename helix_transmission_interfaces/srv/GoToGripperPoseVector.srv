@@ -1,0 +1,8 @@
+string frame_id
+geometry_msgs/Point goal_point
+geometry_msgs/Vector3 goal_direction
+bool plan_linear
+bool ik_uses_prev
+---
+bool success
+string message

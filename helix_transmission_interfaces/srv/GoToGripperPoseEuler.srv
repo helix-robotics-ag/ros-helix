@@ -1,0 +1,9 @@
+string frame_id
+geometry_msgs/Point goal_point
+float64[3] goal_euler_angs
+string axes "sxyz"
+bool plan_linear
+bool ik_uses_prev
+---
+bool success
+string message
