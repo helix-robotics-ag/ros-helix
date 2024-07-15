@@ -123,9 +123,9 @@ def generate_launch_description():
     ld.add_action(motor_head_joint_position_controller_node)
     ld.add_action(motor_head_joint_effort_controller_node)
     ld.add_action(tendon_transmission_node)
-    ld.add_action(gripper_joint_state_broadcaster_node)
-    ld.add_action(gripper_joint_position_controller_node)
-    ld.add_action(helix_gripper_node)
+    # ld.add_action(gripper_joint_state_broadcaster_node)
+    # ld.add_action(gripper_joint_position_controller_node)
+    # ld.add_action(helix_gripper_node)
     ld.add_action(spacenav_node)
 
     return ld
