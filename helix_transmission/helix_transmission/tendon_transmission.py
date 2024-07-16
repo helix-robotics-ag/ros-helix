@@ -27,22 +27,22 @@ class TendonTransmissionNode(Node):
                 self.MOTOR_ORIENTS = np.array(config['motor_orients'], dtype=np.float64)
                 self.TENDON_LIMITS = np.array([config['tendon_min_lim'],
                                                config['tendon_max_lim']])
-                self.HOLDING_CURRENT = config['holding_current'] 
+                self.CURRENT_LIMITS = np.array([config['current_min_lim'],
+                                                config['current_max_lim']])
         except (FileNotFoundError):
             self.get_logger().info('No configuration file found, setting defaults')
             with open(self.path_to_config, 'w') as file:
                 self.PULLEY_RADIUS = 0.01  # [m]
-                self.MOTOR_ORIENTS = np.array([1, 1, 1, 1, 1, 1, -1, -1, -1], dtype=np.float64)  # +ve anticlockwise
-                self.TENDON_LIMITS = np.array([-0.1, 0.1], dtype=np.float64)  # [m]
-                # TODO - remove holding current definition if not needed here. It could be kept here and exposed
-                # somehow to make the default value accesible from all interfaces, or just documented.
-                self.HOLDING_CURRENT = -70.0  # [mA] 
+                self.MOTOR_ORIENTS = np.array([1, 1, 1, 1, 1, 1, -1, -1, -1], dtype=np.float64)  # 1 for motor orientations where anticlockwise pulls the tendon
+                self.TENDON_LIMITS = np.array([-0.1, 0.1], dtype=np.float64)  # [m] per  segment
+                self.CURRENT_LIMITS = np.array([-300.0, 10.0], dtype=np.float64)  # [mA] per segment
                 yaml.dump({
                     'pulley_radius': self.PULLEY_RADIUS,
                     'motor_orients': self.MOTOR_ORIENTS.tolist(),
                     'tendon_min_lim': float(self.TENDON_LIMITS[0]),
                     'tendon_max_lim': float(self.TENDON_LIMITS[1]),
-                    'holding_current': self.HOLDING_CURRENT
+                    'current_min_lim': float(self.CURRENT_LIMITS[0]),
+                    'current_max_lim': float(self.CURRENT_LIMITS[1]),
                     }, file)
         except (yaml.YAMLError, TypeError):
             self.get_logger().error('Unable to read or write configuration file for startup')
@@ -69,6 +69,13 @@ class TendonTransmissionNode(Node):
             self.tendon_to_motor_command_cb,
             10)
         self.tendon_commands_sub
+
+        self.tendon_current_commands_sub = self.create_subscription(
+            Float64MultiArray, 
+            '~/current_commands', 
+            self.tendon_to_motor_current_command_cb,
+            10)
+        self.tendon_current_commands_sub
 
         self.motor_state_sub = self.create_subscription(
             JointState, 
@@ -120,13 +127,24 @@ class TendonTransmissionNode(Node):
     # Callbacks for motor<->tendon transmission
     def tendon_to_motor_command_cb(self, msg):
         command = np.array(msg.data, dtype=np.float64)
-        command_limited = np.clip(command, self.TENDON_LIMITS[0], self.TENDON_LIMITS[1])
+        command_limited = np.hstack([np.clip(command[:3], self.TENDON_LIMITS[0], self.TENDON_LIMITS[1]),
+                                     np.clip(command[3:], 2 * self.TENDON_LIMITS[0], self.TENDON_LIMITS[1])])
         if not np.array_equal(command, command_limited):
             self.get_logger().info('Some tendon commands exceeded limits and were clipped')
         motor_command = Float64MultiArray()
         motor_command.data = ((command_limited * self.MOTOR_ORIENTS) \
                                / self.PULLEY_RADIUS + self.MOTOR_OFFSETS).tolist()
         self.tendon_to_motor_command_pub.publish(motor_command)
+
+    def tendon_to_motor_current_command_cb(self, msg):
+        command = np.array(msg.data, dtype=np.float64)
+        command_limited = np.hstack([np.clip(command[:3], self.CURRENT_LIMITS[0], self.CURRENT_LIMITS[1]),
+                                     np.clip(command[3:], 2 * self.CURRENT_LIMITS[0], self.CURRENT_LIMITS[1])])
+        if not np.array_equal(command, command_limited):
+            self.get_logger().info('Some current commands exceeded limits and were clipped')
+        motor_command = Float64MultiArray()
+        motor_command.data = (command_limited * self.MOTOR_ORIENTS).tolist()
+        self.motor_effort_command_pub.publish(motor_command)
 
     def motor_state_cb(self, msg):
         motor_names = sorted(msg.name)
@@ -183,8 +201,9 @@ class TendonTransmissionNode(Node):
 
     # Callbacks for calibration
     def set_current_cb(self, request, response):
+        command_limited = np.clip(request.current, self.CURRENT_LIMITS[0], self.CURRENT_LIMITS[1])
         self.motor_effort_command_pub.publish(
-            Float64MultiArray(data = request.current * self.MOTOR_ORIENTS))
+            Float64MultiArray(data = command_limited * self.MOTOR_ORIENTS))
         response.success = True
         return response
     
