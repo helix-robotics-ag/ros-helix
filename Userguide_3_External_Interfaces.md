@@ -1,17 +1,16 @@
 # Controlling the robot through Foxglove
 After launching the system on the Pi, go to `<IP_of_Pi>:8080` in a browser on your device. Choose 'Open Connection' and use `ws://<IP_of_Pi>:8765`. You should find and interface as below:
 
-![foxglove_layout](https://github.com/helix-robotics-ag/ros-helix/assets/95340175/b5bd3271-5c53-42a2-936d-4171c3a0dfbd)
+![foxglove_layout](https://github.com/user-attachments/assets/40cca2de-87e8-42b7-b714-4b42e8d9962f)
 
 The elements of the interface are:
-- A: All available topics are shown in this sidebar, or if the Panel tab is selected, settings for the currently highlighted panel are shown
-- B: A 3D visualisation of the robot
-- C: A plot showing each of the tendon state positions
+- A: All available topics are shown in this sidebar, or if the Panel tab is active, settings for the currently selected panel are shown
+- B: A 3D visualisation of the robot model, **note** the arm here represents the state of the model used internally, not the real robot from measurements
+- C: A plot showing each of the tendon state positions (or other topics configured in settings)
 - D: A table with all information from the `/tendon_states` topic. (This seems to be the best way to display all this information, despite the `name` field taking up a lot of space. If the fields under `position` etc just say `Object`, click to expand them)
-- E: This panel will allow you to call the service chosen in the settings. Fill the Request field if needed.
-- F: This panel will allow you to publish messages to a topic, which can be chosen in its settings (you may also need to set the correct message schema there)
-- G: This panel will display the messages received on the topic name entered in the bar at the top of the panel, though the actual data can be hard to read
-- H: Teleop panel (currently unused)
+- E: This panel will allow you to call the service chosen in its settings. Fill the Request field if needed.
+- F: This panel will allow you to publish messages to a topic, which can be chosen in its settings
+- G: This panel will display the messages received on the topic name entered in the bar at the top of the panel
 
 _Note if the interface is different your browser may have cached an old or modified version, you will need to clear your cookies or use Incognito mode to load the default one._
 

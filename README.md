@@ -14,6 +14,8 @@ Connect your device to the Helix RPi, configure network settings and ensure you 
 
 ## Further information
 See the other documentation in this repo for information about:
-1. [Calibrating and controlling the tendon lengths, and the gripper](https://github.com/helix-robotics-ag/ros-helix/blob/main/Userguide_1_Calibration_And_Basic_Control.md)
+
+0. [Configuration files available to adjust system parameters.](https://github.com/helix-robotics-ag/ros-helix/blob/main/Userguide_0_Configuration.md)
+1. [Calibrating and controlling the arm and gripper tendons directly](https://github.com/helix-robotics-ag/ros-helix/blob/main/Userguide_1_Calibration_And_Basic_Control.md)
 2. [Cartesian control of the end effector](https://github.com/helix-robotics-ag/ros-helix/blob/main/Userguide_2_Cartesian_Control.md)
 3. [General information about using the system from the browser-based Foxglove interface or Python scripting using `roslibpy`](https://github.com/helix-robotics-ag/ros-helix/blob/main/Userguide_3_External_Interfaces.md)
