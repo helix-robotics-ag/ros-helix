@@ -1,6 +1,6 @@
 # Configuration files
 
-Several configuration files can be used to adjust parameters of the model (they are read on start up). The files are located at `~/.config/helix` on the Pi, which should have been created when [setting up the Pi](https://github.com/helix-robotics-ag/main?tab=readme-ov-file#i-want-to-set-up-a-new-robotrpi). The directory is mounted to `/tmp/config` in the running containers.
+Several configuration files are read on start up to adjust parameters of the system. The files are located at `~/.config/helix` on the Pi, which should have been created when [setting up the Pi](https://github.com/helix-robotics-ag/main?tab=readme-ov-file#i-want-to-set-up-a-new-robotrpi). When the containers are launched, this directory is mounted to `/tmp/config`.
 
 ### `helix_transmission.config.yml`
 This controls the main physical parameters of the tendon controllers. If no file is present on startup, one will be created with the default values below:
@@ -44,9 +44,9 @@ joystick_control_speed: 0.05          # Nominal TCP speed [m/s] for joystick. An
 ```
 
 ### `pcc_model.config.yml`
-This defines the parameters used to initialise the underlying model for cartesian control. If no file it present, the defaults from the [`HelixKinematicPCCModel`](https://github.com/helix-robotics-ag/helix-models/blob/main/helix_models/helix_kinematic_pcc.py) class will be used.
+This defines the parameters used to initialise the underlying model for cartesian control. If no file is present, the defaults from the [`HelixKinematicPCCModel`](https://github.com/helix-robotics-ag/helix-models/blob/main/helix_models/helix_kinematic_pcc.py) class will be used.
 
-If no file is present, one will **not** be created. If you want to change the parameters, create a file with the below fields. `gripper_length` is probably the parameter you are most likely to want to change, this is the [m] distance in the Z-direction from the end of the centre of the 3rd robot arm section to the gripper TCP. See the `helix_models` repo docs for more information on the others.
+If no file is present, one will **not** be created. If you want to change the parameters, create a file with the below fields. `gripper_length` is probably the parameter you are most likely to want to change, this is the [m] distance in the Z-direction from the arm 'wrist' (`seg3_end_link` frame) to the gripper TCP (`helix_tcp` frame). See the [`helix_models`](https://github.com/helix-robotics-ag/helix-models/tree/main) repo docs for more information on the others.
 ```
 gripper_length: 0.05
 section_lengths: [0.120, 0.240, 0.240]

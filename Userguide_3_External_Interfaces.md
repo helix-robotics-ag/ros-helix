@@ -5,7 +5,7 @@ After launching the system on the Pi, go to `<IP_of_Pi>:8080` in a browser on yo
 
 The elements of the interface are:
 - A: All available topics are shown in this sidebar, or if the Panel tab is active, settings for the currently selected panel are shown
-- B: A 3D visualisation of the robot model, **note** this represents the state of the model used internally, not the real robot from measurements
+- B: A 3D visualisation of the robot model, **note** the arm here represents the state of the model used internally, not the real robot from measurements
 - C: A plot showing each of the tendon state positions (or other topics configured in settings)
 - D: A table with all information from the `/tendon_states` topic. (This seems to be the best way to display all this information, despite the `name` field taking up a lot of space. If the fields under `position` etc just say `Object`, click to expand them)
 - E: This panel will allow you to call the service chosen in its settings. Fill the Request field if needed.
