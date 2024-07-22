@@ -44,7 +44,7 @@ joystick_control_speed: 0.05          # Nominal TCP speed [m/s] for joystick. An
 ```
 
 ### `pcc_model.config.yml`
-This defines the parameters used to initialise the underlying model for cartesian control. If no file is present, the defaults from the [`HelixKinematicPCCModel`](https://github.com/helix-robotics-ag/helix-models/blob/main/helix_models/helix_kinematic_pcc.py) class will be used.
+This defines the parameters used to create the underlying model for cartesian control. If no file is present, the defaults from the [`HelixKinematicPCCModel`](https://github.com/helix-robotics-ag/helix-models/blob/main/helix_models/helix_kinematic_pcc.py) class will be used.
 
 If no file is present, one will **not** be created. If you want to change the parameters, create a file with the below fields. `gripper_length` is probably the parameter you are most likely to want to change, this is the [m] distance in the Z-direction from the arm 'wrist' (`seg3_end_link` frame) to the gripper TCP (`helix_tcp` frame). See the [`helix_models`](https://github.com/helix-robotics-ag/helix-models/tree/main) repo docs for more information on the others.
 ```
@@ -55,3 +55,4 @@ k_axial: 1.0
 d_limits: [0.7854, 1.571, 1.571]
 ws_limits: [[0.055, 0.7854, 0.065, 0.120, 0.7854, 0.085],[0.115, 1.571, 0.150, 0.255, 1.571, 0.150],[0.125, 1.571, 0.165, 0.240, 1.571, 0.185]]
 ```
+Note that all control that relies on the model (incremental and pose-to-pose Cartesian, and direct DxDyL commands) respect the limits defined inside the model.

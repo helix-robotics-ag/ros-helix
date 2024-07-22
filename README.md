@@ -12,7 +12,11 @@ Among the output, you should see some messages in green and blue saying 'Loaded.
 ## Connecting to the Helix ROS system
 Connect your device to the Helix RPi, configure network settings and ensure you are able to communicate with the Pi. If you can ping the Pi successfully, you should be able to see the Helix ROS system as well. Probably the easiest way to quickly check if it is working is through Foxglove (see the external interfaces readme).
 
-## Further information
+## Reference for Topics and Services
+
+A summary of the relevant topics and services is [here](Topics_and_Services.md). You should still read the userguide information for the relevant systems as well to understand how they work.
+
+## Userguide
 See the other documentation in this repo for information about:
 
 0. [Configuration files available to adjust system parameters.](https://github.com/helix-robotics-ag/ros-helix/blob/main/Userguide_0_Configuration.md)
