@@ -6,17 +6,17 @@
 ### Topics
 
 `~/commands` `Float64MultiArray[9]`
-- Commands the arm tendon position setpoint in [m], relative to the calibrated tendon 0 position, within the configued limits.
+- Commands the arm tendon position setpoint in [m], relative to the calibrated tendon 0 position, within the configured limits.
 
 `~/current_commands` `Float64MultiArray[9]`
-- Commands the arm tendon current in [mA], within the configued limits.
+- Commands the arm tendon current in [mA], within the configured limits.
 
 `~/tendon_states` `JointState[9]`
 - Position and velocity of arm tendons.
 
 ### Services
 
-`~/tendon_transmission_node/set_current` `helix_transmission_interfaces/srv/SetCurrent`
+`~/tendon_transmission_node/set_current` `helix_transmission_interfaces/SetCurrent`
 
 ```
 float64 current 0.0
@@ -24,8 +24,7 @@ float64 current 0.0
 bool success
 string message
 ```
-
-- Sets all arm tendon current commands to the [mA] value of `current`, within the configued limits.
+- Sets all arm tendon current commands to the [mA] value of `current`, within the configured limits.
 
 `~/set_motor_offsets` `std_srvs/Trigger`
 - Sets all arm tendon 0 calibration point to the current state, by writing the current motor joint positions to the calibration offsets file.
@@ -76,8 +75,7 @@ string message
 `~/deactivate_joystick_control` `std_srvs/Trigger`
 - Deactivate teleoperation control by disconnecting the `spacenav/twist` topic from `~/delta_increment`.
 
-`~/go_to_gripper_pose_vector` `helix_transmission_interfaces/srv/GoToGripperPoseVector`
-- Move the gripper to a goal defined by a gripper TCP point and vector direction.
+`~/go_to_gripper_pose_vector` `helix_transmission_interfaces/GoToGripperPoseVector`
 
 ```
 string frame_id
@@ -89,10 +87,9 @@ bool ik_uses_prev
 bool success
 string message
 ```
+- Move the gripper to a goal defined by a gripper TCP point and vector direction.
 
-`~/go_to_gripper_pose_quat` `helix_transmission_interfaces/srv/GoToGripperPoseQuat`
-- Move the gripper to a goal defined by a gripper TCP point and quaternion direction.
-
+`~/go_to_gripper_pose_quat` `helix_transmission_interfaces/GoToGripperPoseQuat`
 ```
 string frame_id
 geometry_msgs/Pose goal_pose
@@ -102,10 +99,9 @@ bool ik_uses_prev
 bool success
 string message
 ```
+- Move the gripper to a goal defined by a gripper TCP point and quaternion direction.
 
-`~/go_to_gripper_pose_euler` `helix_transmission_interfaces/srv/GoToGripperPoseEuler`
-- Move the gripper to a goal defined by a gripper TCP point and Euler angle set direction.
-
+`~/go_to_gripper_pose_euler` `helix_transmission_interfaces/GoToGripperPoseEuler`
 ```
 string frame_id
 geometry_msgs/Point goal_point
@@ -117,6 +113,7 @@ bool ik_uses_prev
 bool success
 string message
 ```
+- Move the gripper to a goal defined by a gripper TCP point and Euler angle set direction.
 
 ## `ros2_control`
 
@@ -136,7 +133,3 @@ The below topics are used by `ros2_control` to interface directly to the motors.
 
 `gripper_joint_state_broadcaster/joint_states` `JointState[1]`
 - Gripper tendon motor joint position, velocity and current.
-
-
-
- 
