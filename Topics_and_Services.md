@@ -16,6 +16,13 @@
 
 ### Services
 
+`~/switch_to_current_control` `std_srvs/Trigger`
+- Switches all motor controllers to current mode so that position commands will be ignored.
+
+`~/switch_to_position_control` `std_srvs/Trigger`
+- Switches all motor controllers to position mode so that current commands will be ignored.
+
+
 `~/tendon_transmission_node/set_current` `helix_transmission_interfaces/SetCurrent`
 
 ```
@@ -24,16 +31,14 @@ float64 current 0.0
 bool success
 string message
 ```
+
 - Sets all arm tendon current commands to the [mA] value of `current`, within the configured limits.
 
 `~/set_motor_offsets` `std_srvs/Trigger`
 - Sets all arm tendon 0 calibration point to the current state, by writing the current motor joint positions to the calibration offsets file.
 
-`~/switch_to_current_control` `std_srvs/Trigger`
-- Switches all motor controllers to current mode so that position commands will be ignored.
-
-`~/switch_to_position_control` `std_srvs/Trigger`
-- Switches all motor controllers to position mode so that current commands will be ignored.
+`~/check_calibration` `std_srvs/Trigger`
+- Checks whether the current tendon positions are within +\\-Pi radians the calibrated 0 position. If they aren't, the joint positions in the calibrated offsets files will be offset by multiples of +\\-2*Pi radians until they are. This should be used when the robot is in the same state it was calibrated in (ie straight with nominal tension current applied), to account for the motors losing their absolute position refrence when switched off.
 
 ## `/helix_gripper_node` Namespace
 
