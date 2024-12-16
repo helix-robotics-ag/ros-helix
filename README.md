@@ -16,6 +16,10 @@ Connect your device to the Helix RPi, configure network settings and ensure you 
 
 A summary of the relevant topics and services is [here](Topics_and_Services.md). You should still read the userguide information for the relevant systems as well to understand how they work.
 
+## ROS System Diagram Overview
+
+A diagram overview of the system is [here](helix_ros2_diagram.pdf). This shows the connections and message flow between the ROS2 topics, services etc.
+
 ## Userguide
 See the other documentation in this repo for information about:
 
